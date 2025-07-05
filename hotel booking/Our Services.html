@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuxStay - Our Services</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0f172a',
+                        secondary: '#0ea5e9',
+                        accent: '#f97316',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* CSS Variables for consistency with navbar and about page */
+:root {
+    --primary: #1d4ed8; /* Matches Tailwind's blue-600 or navbar's text-primary */
+    --secondary: #f59e0b; /* Matches Tailwind's yellow-500 or navbar's text-secondary */
+}
+
+/* General body styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+}
+
+/* Services Hero Section */
+.services-hero {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+                      url('https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1800&q=80');
+    background-size: cover;
+    background-position: center;
+}
+
+/* Service Card */
+.service-card {
+    transition: all 0.3s ease;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15);
+}
+
+/* Service Icon (for Font Awesome icons) */
+.service-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 25px;
+    font-size: 34px;
+    background-color: var(--primary); /* Matches navbar's primary color */
+    color: white; /* Ensures icon visibility */
+}
+
+/* Benefit Card */
+.benefit-card {
+    border-left: 4px solid var(--primary); /* Matches navbar's primary color */
+    transition: all 0.3s ease;
+}
+
+.benefit-card:hover {
+    transform: translateX(5px);
+    background: linear-gradient(to right, #f0f9ff, #ffffff);
+}
+
+/* Feature Background */
+.feature-bg {
+    background-image: url('https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1800&q=80');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/* Process Steps */
+.process-step {
+    position: relative;
+    padding-left: 90px;
+    margin-bottom: 40px;
+}
+
+.process-step::before {
+    content: '';
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--primary); /* Matches navbar's primary color */
+    left: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.step-1::before { content: '1'; }
+.step-2::before { content: '2'; }
+.step-3::before { content: '3'; }
+.step-4::before { content: '4'; }
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .process-step {
+        padding-left: 70px;
+    }
+
+    .process-step::before {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+    }
+}
+        
+    </style>
+</head>
+<body class="bg-gray-50 overflow-x-hidden w-full">
+    <!-- Header/Navigation -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center">
+                <i class="fas fa-hotel text-secondary text-3xl mr-2"></i>
+                <span class="text-2xl font-bold text-primary">Lux<span class="text-secondary">Stay</span></span>
+            </div>
+            
+             <nav class="hidden md:flex space-x-8">
+                <a href="Home.html" class="text-primary font-semibold hover:text-secondary">Home</a>
+                <a href="Room.html" class="text-gray-600 hover:text-secondary">Rooms</a>
+                <a href="About.html" class="text-gray-600 hover:text-secondary">About</a>
+                <a href="Our Services.html" class="text-gray-600 hover:text-secondary">Services</a>
+                <a href="contact.html" class="text-gray-600 hover:text-secondary">Contact</a>
+            </nav>
+            
+            <div class="flex items-center space-x-4">
+                <button class="bg-white text-primary font-medium px-4 py-2 rounded-lg border border-gray-300 hover:bg-gray-50">Sign In</button>
+                <button class="bg-secondary text-white font-medium px-4 py-2 rounded-lg hover:bg-blue-500">Register</button>
+                <button class="md:hidden text-primary text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="services-hero py-28 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6">Our Premium Services</h1>
+            <p class="text-xl max-w-2xl mx-auto">Experience unparalleled hospitality with our comprehensive suite of services designed for the modern traveler</p>
+        </div>
+    </section>
+
+    <!-- Core Services Intro -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center mb-16">
+                <h2 class="text-3xl font-bold text-primary mb-4">Beyond Just Hotel Bookings</h2>
+                <p class="text-gray-600">At LuxStay, we've redefined the travel experience by offering services that go beyond traditional hotel bookings. Our comprehensive approach ensures every aspect of your journey is seamless, enjoyable, and memorable.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="service-card bg-white p-8 text-center">
+                    <div class="service-icon bg-blue-100 text-blue-600">
+                        <i class="fas fa-hotel"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-3">Hotel Booking</h3>
+                    <p class="text-gray-600 mb-6">Search, compare, and book from thousands of verified hotels at the best rates worldwide.</p>
+                    <div class="text-left">
+                        <h4 class="font-semibold text-primary mb-3">Key Features:</h4>
+                        <ul class="space-y-2 text-gray-600">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>Real-time availability & pricing</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>Advanced filtering options</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>Exclusive member discounts</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="service-card bg-white p-8 text-center">
+                    <div class="service-icon bg-cyan-100 text-cyan-600">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-3">Verified Reviews</h3>
+                    <p class="text-gray-600 mb-6">Read authentic reviews from real guests to make informed decisions about your stay.</p>
+                    <div class="text-left">
+                        <h4 class="font-semibold text-primary mb-3">Key Features:</h4>
+                        <ul class="space-y-2 text-gray-600">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>100% verified guest reviews</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>Detailed ratings for amenities</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>Photo verification system</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="service-card bg-white p-8 text-center">
+                    <div class="service-icon bg-green-100 text-green-600">
+                        <i class="fas fa-tag"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-3">Best Price Guarantee</h3>
+                    <p class="text-gray-600 mb-6">We match or beat prices to save you money on every booking.</p>
+                    <div class="text-left">
+                        <h4 class="font-semibold text-primary mb-3">Key Features:</h4>
+                        <ul class="space-y-2 text-gray-600">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>Price match promise</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>Lowest price alerts</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>Member-exclusive deals</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Additional Services -->
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-primary mb-4">More Ways We Serve You</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Comprehensive services designed for every travel need</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Service 4 -->
+                <div class="benefit-card bg-white p-6">
+                    <div class="flex items-start mb-4">
+                        <div class="bg-blue-100 text-blue-600 p-3 rounded-lg mr-4">
+                            <i class="fas fa-exchange-alt text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-primary mb-1">Flexible Cancellations</h3>
+                            <p class="text-gray-600 text-sm">Most bookings can be cancelled or changed with no extra charge.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Service 5 -->
+                <div class="benefit-card bg-white p-6">
+                    <div class="flex items-start mb-4">
+                        <div class="bg-cyan-100 text-cyan-600 p-3 rounded-lg mr-4">
+                            <i class="fas fa-headset text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-primary mb-1">24/7 Customer Support</h3>
+                            <p class="text-gray-600 text-sm">Friendly, multilingual team ready to help any time, anywhere.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Service 6 -->
+                <div class="benefit-card bg-white p-6">
+                    <div class="flex items-start mb-4">
+                        <div class="bg-purple-100 text-purple-600 p-3 rounded-lg mr-4">
+                            <i class="fas fa-users text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-primary mb-1">Group & Corporate Bookings</h3>
+                            <p class="text-gray-600 text-sm">Special rates and dedicated support for groups or business trips.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Service 7 -->
+                <div class="benefit-card bg-white p-6">
+                    <div class="flex items-start mb-4">
+                        <div class="bg-yellow-100 text-yellow-600 p-3 rounded-lg mr-4">
+                            <i class="fas fa-crown text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-primary mb-1">Loyalty Program</h3>
+                            <p class="text-gray-600 text-sm">Earn points on every booking and redeem them for discounts.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-primary mb-4">How Our Service Works</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Simple steps to your perfect stay</p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="process-step step-1">
+                    <h3 class="text-xl font-bold text-primary mb-3">Search & Discover</h3>
+                    <p class="text-gray-600">Use our intuitive search tools to find hotels that match your preferences. Filter by price, location, amenities, and more to discover your ideal accommodation.</p>
+                </div>
+                
+                <div class="process-step step-2">
+                    <h3 class="text-xl font-bold text-primary mb-3">Compare & Select</h3>
+                    <p class="text-gray-600">View detailed information, photos, and verified reviews. Use our comparison tools to evaluate options and select the perfect hotel for your needs.</p>
+                </div>
+                
+                <div class="process-step step-3">
+                    <h3 class="text-xl font-bold text-primary mb-3">Book with Confidence</h3>
+                    <p class="text-gray-600">Secure your booking with our best price guarantee and flexible cancellation policy. Receive instant confirmation and all necessary details.</p>
+                </div>
+                
+                <div class="process-step step-4">
+                    <h3 class="text-xl font-bold text-primary mb-3">Enjoy Your Stay</h3>
+                    <p class="text-gray-600">Check in and enjoy your trip with 24/7 support available for any needs. After your stay, share your experience to help fellow travelers.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Loyalty Program -->
+    <section class="py-20 bg-gradient-to-r from-primary to-gray-900 text-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center">
+                <div class="bg-yellow-500 text-yellow-900 font-bold py-1 px-4 rounded-full inline-block mb-6">
+                    <i class="fas fa-crown mr-2"></i>Exclusive Program
+                </div>
+                <h2 class="text-3xl font-bold mb-6">LuxStay Rewards Program</h2>
+                <p class="text-blue-100 text-xl mb-10">Earn points on every booking and enjoy exclusive member benefits</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                    <div class="bg-white bg-opacity-10 p-6 rounded-xl backdrop-blur-sm">
+                        <div class="text-4xl font-bold text-yellow-400 mb-3">1X</div>
+                        <h3 class="text-xl font-bold mb-2">Points Per Dollar</h3>
+                        <p class="text-blue-100">Earn 1 point for every dollar spent on bookings</p>
+                    </div>
+                    <div class="bg-white bg-opacity-10 p-6 rounded-xl backdrop-blur-sm">
+                        <div class="text-4xl font-bold text-yellow-400 mb-3">2X</div>
+                        <h3 class="text-xl font-bold mb-2">Elite Members</h3>
+                        <p class="text-blue-100">Earn double points as an elite member</p>
+                    </div>
+                    <div class="bg-white bg-opacity-10 p-6 rounded-xl backdrop-blur-sm">
+                        <div class="text-4xl font-bold text-yellow-400 mb-3">5K</div>
+                        <h3 class="text-xl font-bold mb-2">Welcome Bonus</h3>
+                        <p class="text-blue-100">Get 5,000 points when you join</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white bg-opacity-10 rounded-xl p-8 backdrop-blur-sm max-w-2xl mx-auto">
+                    <h3 class="text-xl font-bold mb-4">Member Benefits</h3>
+                    <ul class="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-yellow-400 mr-3"></i>
+                            <span>Exclusive member-only rates</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-yellow-400 mr-3"></i>
+                            <span>Free room upgrades</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-yellow-400 mr-3"></i>
+                            <span>Priority check-in/check-out</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-yellow-400 mr-3"></i>
+                            <span>Late checkout privileges</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-yellow-400 mr-3"></i>
+                            <span>Complimentary breakfast</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-yellow-400 mr-3"></i>
+                            <span>Dedicated support line</span>
+                        </li>
+                    </ul>
+                    
+                    <button class="mt-8 bg-yellow-500 hover:bg-yellow-600 text-yellow-900 font-bold py-3 px-8 rounded-lg transition-colors">
+                        Join Rewards Program
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Corporate Services -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-primary mb-4">Corporate Solutions</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Tailored services for business travelers and organizations</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
+                <div>
+                    <h3 class="text-2xl font-bold text-primary mb-6">Benefits for Businesses</h3>
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="bg-blue-100 text-blue-600 p-3 rounded-lg mr-4">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-2">Centralized Billing</h4>
+                                <p class="text-gray-600">Simplify expense management with consolidated invoices and reporting.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-green-100 text-green-600 p-3 rounded-lg mr-4">
+                                <i class="fas fa-percent"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-2">Volume Discounts</h4>
+                                <p class="text-gray-600">Special negotiated rates based on your company's travel volume.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-purple-100 text-purple-600 p-3 rounded-lg mr-4">
+                                <i class="fas fa-user-tie"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-2">Dedicated Account Manager</h4>
+                                <p class="text-gray-600">Personalized support and travel coordination for your team.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-cyan-100 text-cyan-600 p-3 rounded-lg mr-4">
+                                <i class="fas fa-sliders-h"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-2">Custom Travel Policies</h4>
+                                <p class="text-gray-600">Implement and enforce your company's travel guidelines.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-50 p-8 rounded-xl">
+                    <h3 class="text-2xl font-bold text-primary mb-6">Request a Corporate Account</h3>
+                    <form class="space-y-4">
+                        <div>
+                            <label class="block text-gray-700 text-sm font-medium mb-1">Company Name</label>
+                            <input type="text" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary">
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-gray-700 text-sm font-medium mb-1">Your Name</label>
+                                <input type="text" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-gray-700 text-sm font-medium mb-1">Job Title</label>
+                                <input type="text" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary">
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-gray-700 text-sm font-medium mb-1">Email</label>
+                                <input type="email" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-gray-700 text-sm font-medium mb-1">Phone</label>
+                                <input type="tel" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-gray-700 text-sm font-medium mb-1">Estimated Annual Bookings</label>
+                            <select class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary">
+                                <option>Select range</option>
+                                <option>1-50 bookings</option>
+                                <option>51-200 bookings</option>
+                                <option>201-500 bookings</option>
+                                <option>500+ bookings</option>
+                            </select>
+                        </div>
+                        
+                        <button class="w-full bg-secondary hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-lg transition-colors">
+                            Request Corporate Account
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="feature-bg py-24 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to Experience Premium Service?</h2>
+            <p class="text-xl mb-10 max-w-2xl mx-auto">Join thousands of satisfied travelers who trust LuxStay for their hotel bookings</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="rooms.html" class="bg-white text-primary font-semibold py-3 px-8 rounded-lg text-lg hover:bg-gray-100">Book Now</a>
+                <a href="contact.html" class="bg-transparent border-2 border-white text-white font-semibold py-3 px-8 rounded-lg text-lg hover:bg-white hover:text-primary">Contact Us</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <div class="flex items-center mb-6">
+                        <i class="fas fa-hotel text-secondary text-2xl mr-2"></i>
+                        <span class="text-xl font-bold">Lux<span class="text-secondary">Stay</span></span>
+                    </div>
+                    <p class="text-gray-400 mb-4">Your trusted partner for luxury hotel bookings around the world.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="home.html" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="rooms.html" class="text-gray-400 hover:text-white">Rooms & Suites</a></li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-white">About Us</a></li>
+                        <li><a href="services.html" class="text-gray-400 hover:text-white">Services</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Support</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-white">FAQs</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Terms of Service</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Booking Terms</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Customer Support</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Contact Us</h4>
+                    <ul class="space-y-3 text-gray-400">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-3"></i>
+                            <span>123 Luxury Avenue, Resort City, RC 12345</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-3"></i>
+                            <span>+1 (555) 123-4567</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-3"></i>
+                            <span>info@luxstay.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 text-center text-gray-500">
+                <p>&copy; 2023 LuxStay Hotel Booking. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple animation for service cards
+        document.addEventListener('DOMContentLoaded', function() {
+            const serviceCards = document.querySelectorAll('.service-card, .benefit-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = "1";
+                        entry.target.style.transform = "translateY(0)";
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            serviceCards.forEach(card => {
+                card.style.opacity = "0";
+                card.style.transform = "translateY(20px)";
+                card.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>

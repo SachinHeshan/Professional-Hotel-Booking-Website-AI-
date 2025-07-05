@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuxStay - Luxury Hotel Booking</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0f172a',
+                        secondary: '#0ea5e9',
+                        accent: '#f97316',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            height:0%;
+           
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        .hero-bg {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .hotel-card:hover {
+            transform: translateY(-5px);
+            transition: all 0.3s ease;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .testimonial-card {
+            background: linear-gradient(to bottom right, #ffffff, #f0f9ff);
+            border-left: 4px solid #0ea5e9;
+        }
+        
+        .benefit-card {
+            transition: all 0.3s ease;
+        }
+        
+        .benefit-card:hover {
+            background: linear-gradient(to bottom right, #0f172a, #1e293b);
+            color: white;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(to right, #0ea5e9, #0284c7);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(to right, #0284c7, #0ea5e9);
+            transform: translateY(-2px);
+        }
+        
+        .featured-bg {
+            background: url('https://images.unsplash.com/photo-1618773928121-c32242e63f39?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .search-form {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 overflow-x-hidden w-full  ">
+
+    <!-- Header/Navigation -->
+    <header class="bg-white shadow-sm sticky top-0 z-50 ">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center">
+                <i class="fas fa-hotel text-secondary text-3xl mr-2"></i>
+                <a href="Home.html" class="text-2xl font-bold text-primary">Lux<span class="text-secondary">Stay</span></a>
+            </div>
+            
+           <nav class="hidden md:flex space-x-8">
+                <a href="Home.html" class="text-primary font-semibold hover:text-secondary">Home</a>
+                <a href="Room.html" class="text-gray-600 hover:text-secondary">Rooms</a>
+                <a href="About.html" class="text-gray-600 hover:text-secondary">About</a>
+                <a href="Our Services.html" class="text-gray-600 hover:text-secondary">Services</a>
+                <a href="contact.html" class="text-gray-600 hover:text-secondary">Contact</a>
+            </nav>
+            
+           <div class="flex items-center space-x-4">
+    <button type="button" onclick="window.location.href='regi-log.html'" class="bg-white text-primary font-medium px-4 py-2 rounded-lg border border-gray-300 hover:bg-gray-50" aria-label="Sign in to your account">Sign In</button>
+    <button type="button" onclick="window.location.href='regi-log.html'" class="bg-blue-600 text-white font-medium px-4 py-2 rounded-lg hover:bg-blue-700" aria-label="Register for a new account">Register</button>
+    <button type="button" class="md:hidden text-primary text-2xl" aria-label="Toggle navigation menu">
+        <i class="fas fa-bars"></i>
+    </button>
+</div>
+        </div>
+    </header>
+
+    <!-- Hero Section with Search Bar -->
+    <section class="hero-bg py-20 text-white">
+  <div class="container mx-auto px-4 py-12">
+    <div class="max-w-2xl mx-auto text-center">
+      <h1 class="text-4xl md:text-5xl font-bold mb-6">
+        Discover Your Perfect Stay
+      </h1>
+      <p class="text-xl mb-10">
+        Find and book the best hotels around the world with exclusive deals
+      </p>
+
+      <form class="search-form bg-white rounded-xl text-gray-800 rounded-xl p-6 mb-8 text-left">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <!-- Destination -->
+          <div class="md:col-span-2">
+            <label for="destination" class="block text-gray-700 text-sm font-medium mb-1">
+              Destination
+            </label>
+            <div class="relative">
+              <input
+                type="text"
+                id="destination"
+                class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
+                placeholder="Where are you going?"
+                aria-label="Destination"
+              />
+              <i class="fas fa-map-marker-alt absolute right-3 top-3.5 text-gray-400"></i>
+            </div>
+          </div>
+
+          <!-- Dates -->
+          <div>
+            <label for="dates" class="block text-gray-700 text-sm font-medium mb-1">
+              Check-in /out
+            </label>
+            <div class="relative">
+              <input
+                type="text"
+                id="dates"
+                class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
+                placeholder="Select dates"
+                aria-label="Check-in and Check-out dates"
+              />
+              <i class="fas fa-calendar absolute right-3 top-3.5 text-gray-400"></i>
+            </div>
+          </div>
+
+          <!-- Guests -->
+          <div>
+            <label for="guests" class="block text-gray-700 text-sm font-medium mb-1">
+              Guests
+            </label>
+            <div class="relative">
+              <select
+                id="guests"
+                class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
+                aria-label="Number of guests"
+              >
+                <option>1 Guest</option>
+                <option>2 Guests</option>
+                <option>3 Guests</option>
+                <option>4 Guests</option>
+                <option>5+ Guests</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          class="btn-primary w-full mt-4 py-3 rounded-lg font-semibold text-lg"
+        >
+          Search Hotels
+        </button>
+      </form>
+
+      <div class="flex justify-center flex-wrap gap-4 text-sm">
+        <span class="flex items-center">
+          <i class="fas fa-check-circle text-secondary mr-2"></i> Best Price Guarantee
+        </span>
+        <span class="flex items-center">
+          <i class="fas fa-check-circle text-secondary mr-2"></i> No Booking Fees
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+    <!-- Featured Hotels & Special Deals -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-primary mb-4">Featured Hotels & Special Deals</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Discover our hand-picked selection of luxury hotels with exclusive discounts</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Hotel Card 1 -->
+                <div class="hotel-card bg-white rounded-xl overflow-hidden shadow-lg">
+                    <div class="h-56 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Grand Plaza Hotel" class="w-full h-full object-cover">
+                        <div class="relative -mt-10 mx-4">
+                            <span class="bg-accent text-white font-bold py-2 px-4 rounded-lg">30% OFF</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-bold text-primary">Grand Plaza Hotel</h3>
+                            <span class="bg-secondary text-white text-sm py-1 px-2 rounded">4.8</span>
+                        </div>
+                        <div class="flex items-center text-gray-600 mb-4">
+                            <i class="fas fa-map-marker-alt mr-2"></i>
+                            <span>Bali, Indonesia</span>
+                        </div>
+                        <p class="text-gray-700 mb-4">Luxury beachfront resort with panoramic ocean views and premium amenities.</p>
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <span class="text-xl font-bold text-primary">$189</span>
+                                <span class="text-gray-500 line-through ml-2">$270</span>
+                                <span class="text-gray-600 text-sm ml-2">/ night</span>
+                            </div>
+                            <button class="btn-primary text-white py-2 px-4 rounded-lg font-medium">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Hotel Card 2 -->
+                <div class="hotel-card bg-white rounded-xl overflow-hidden shadow-lg">
+                    <div class="h-56 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Mountain View Resort" class="w-full h-full object-cover">
+                        <div class="relative -mt-10 mx-4">
+                            <span class="bg-secondary text-white font-bold py-2 px-4 rounded-lg">HOT DEAL</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-bold text-primary">Mountain View Resort</h3>
+                            <span class="bg-secondary text-white text-sm py-1 px-2 rounded">4.9</span>
+                        </div>
+                        <div class="flex items-center text-gray-600 mb-4">
+                            <i class="fas fa-map-marker-alt mr-2"></i>
+                            <span>Swiss Alps, Switzerland</span>
+                        </div>
+                        <p class="text-gray-700 mb-4">Exclusive alpine retreat with spa services and ski-in/ski-out access.</p>
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <span class="text-xl font-bold text-primary">$245</span>
+                                <span class="text-gray-600 text-sm ml-2">/ night</span>
+                            </div>
+                            <button class="btn-primary text-white py-2 px-4 rounded-lg font-medium">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Hotel Card 3 -->
+                <div class="hotel-card bg-white rounded-xl overflow-hidden shadow-lg">
+                    <div class="h-56 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Royal Palace Hotel" class="w-full h-full object-cover">
+                        <div class="relative -mt-10 mx-4">
+                            <span class="bg-accent text-white font-bold py-2 px-4 rounded-lg">15% OFF</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-bold text-primary">Royal Palace Hotel</h3>
+                            <span class="bg-secondary text-white text-sm py-1 px-2 rounded">4.7</span>
+                        </div>
+                        <div class="flex items-center text-gray-600 mb-4">
+                            <i class="fas fa-map-marker-alt mr-2"></i>
+                            <span>Paris, France</span>
+                        </div>
+                        <p class="text-gray-700 mb-4">Historic luxury hotel in the heart of Paris with exceptional service.</p>
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <span class="text-xl font-bold text-primary">$210</span>
+                                <span class="text-gray-500 line-through ml-2">$247</span>
+                                <span class="text-gray-600 text-sm ml-2">/ night</span>
+                            </div>
+                            <button class="btn-primary text-white py-2 px-4 rounded-lg font-medium">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <button  onclick="window.location.href='All Hotels.html'" class="bg-white border border-secondary text-secondary font-semibold py-3 px-8 rounded-lg hover:bg-secondary hover:text-white transition-all">
+                    View All Hotels <i class="fas fa-arrow-right ml-2"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-16 bg-gradient-to-br from-gray-50 to-blue-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-primary mb-4">What Our Guests Say</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Hear from travelers who have experienced the exceptional service and comfort of our hotels</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card rounded-lg p-6 shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="Sarah Johnson" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-primary">Sarah Johnson</h4>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic">"The Grand Plaza Hotel exceeded all our expectations! The staff was incredibly attentive, and the ocean view from our room was breathtaking. Will definitely return!"</p>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card rounded-lg p-6 shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="Michael Chen" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-primary">Michael Chen</h4>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic">"Mountain View Resort was the perfect winter getaway. Ski-in/ski-out access made our trip so convenient, and the spa services were top-notch after a day on the slopes."</p>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card rounded-lg p-6 shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" alt="Emma Rodriguez" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-primary">Emma Rodriguez</h4>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic">"Our stay at Royal Palace was magical! The attention to detail, the exquisite dining, and the central location made our Paris vacation unforgettable. Highly recommend!"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="py-16 bg-primary text-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">Why Book With LuxStay?</h2>
+                <p class="max-w-2xl mx-auto text-blue-100">Experience the difference with our customer-first approach to hotel booking</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Benefit 1 -->
+                <div class="benefit-card bg-white bg-opacity-10 p-8 rounded-xl backdrop-blur-sm">
+                    <div class="w-16 h-16 rounded-full bg-secondary flex items-center justify-center mb-6">
+                        <i class="fas fa-tag text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Best Price Guarantee</h3>
+                    <p class="text-blue-100">Found a lower price elsewhere? We'll match it and give you an additional discount.</p>
+                </div>
+                
+                <!-- Benefit 2 -->
+                <div class="benefit-card bg-white bg-opacity-10 p-8 rounded-xl backdrop-blur-sm">
+                    <div class="w-16 h-16 rounded-full bg-secondary flex items-center justify-center mb-6">
+                        <i class="fas fa-headset text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">24/7 Customer Support</h3>
+                    <p class="text-blue-100">Our dedicated support team is available around the clock to assist with your bookings.</p>
+                </div>
+                
+                <!-- Benefit 3 -->
+                <div class="benefit-card bg-white bg-opacity-10 p-8 rounded-xl backdrop-blur-sm">
+                    <div class="w-16 h-16 rounded-full bg-secondary flex items-center justify-center mb-6">
+                        <i class="fas fa-shield-alt text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Secure & Easy Booking</h3>
+                    <p class="text-blue-100">Our secure platform ensures your personal information and payments are always protected.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="featured-bg py-20 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready for Your Next Adventure?</h2>
+            <p class="text-xl mb-10 max-w-2xl mx-auto">Join thousands of satisfied travelers who have discovered the perfect stay with LuxStay</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <button class="btn-primary text-white font-semibold py-3 px-8 rounded-lg text-lg">Book Now</button>
+                <button class="bg-white text-primary font-semibold py-3 px-8 rounded-lg text-lg hover:bg-gray-100">Explore Destinations</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <div class="flex items-center mb-6">
+                        <i class="fas fa-hotel text-secondary text-2xl mr-2"></i>
+                        <span class="text-xl font-bold">Lux<span class="text-secondary">Stay</span></span>
+                    </div>
+                    <p class="text-gray-400 mb-4">Your trusted partner for luxury hotel bookings around the world.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="Rooms & Suites.html" class="text-gray-400 hover:text-white">Rooms & Suites</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Special Offers</a></li>
+                        <li><a href="Gallery.html" class="text-gray-400 hover:text-white">Gallery</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Support</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-white">FAQs</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Terms of Service</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Booking Terms</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Customer Support</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Newsletter</h4>
+                    <p class="text-gray-400 mb-4">Subscribe to get special offers and travel tips</p>
+                    <form class="flex">
+                        <input type="email" placeholder="Your email" class="px-4 py-2 w-full rounded-l-lg focus:outline-none text-gray-800">
+                        <button class="bg-secondary hover:bg-blue-500 text-white px-4 rounded-r-lg">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 text-center text-gray-500">
+                <p>&copy; 2023 LuxStay Hotel Booking. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple testimonial slider functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // For demo purposes, we'll just show an alert when search is clicked
+            const searchBtn = document.querySelector('.btn-primary');
+            if (searchBtn) {
+                searchBtn.addEventListener('click', function() {
+                    alert('Search functionality would be implemented with a backend system. For this demo, it shows this message.');
+                });
+            }
+            
+            // For booking buttons
+            const bookButtons = document.querySelectorAll('.hotel-card button');
+            bookButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    alert('Booking system would connect to a payment gateway. For this demo, it shows this message.');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

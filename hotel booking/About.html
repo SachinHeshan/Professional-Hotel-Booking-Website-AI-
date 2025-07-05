@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuxStay - About Us</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0f172a',
+                        secondary: '#0ea5e9',
+                        accent: '#f97316',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+      /* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* CSS Variables for consistency with navbar (primary, secondary) */
+:root {
+    --primary: #1d4ed8; /* Matches Tailwind's blue-600 or your custom primary */
+    --secondary: #f59e0b; /* Matches Tailwind's yellow-500 or your custom secondary */
+}
+
+/* General body styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+}
+
+/* About Hero Section */
+.about-hero {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+                      url('https://images.unsplash.com/photo-1561501900-3701fa6a0864?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1800&q=80');
+    background-size: cover;
+    background-position: center;
+}
+
+/* Mission Card */
+.mission-card {
+    transition: all 0.3s ease;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.mission-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15);
+}
+
+/* Testimonial Card */
+.testimonial-card {
+    background: linear-gradient(to bottom right, #ffffff, #f0f9ff);
+    border-left: 4px solid var(--primary); /* Matches navbar's primary color */
+}
+
+/* Team Member */
+.team-member:hover img {
+    transform: scale(1.05);
+}
+
+.team-member img {
+    transition: transform 0.5s ease;
+}
+
+/* Value Icon (for Font Awesome icons) */
+.value-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 30px;
+    background-color: var(--primary); /* Matches navbar's primary color */
+    color: white; /* Assuming icons are white for contrast */
+}
+
+/* Timeline */
+.timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.timeline::after {
+    content: '';
+    position: absolute;
+    width: 4px;
+    background-color: var(--primary); /* Matches navbar's primary color */
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -2px;
+}
+
+.timeline-item {
+    padding: 10px 40px;
+    position: relative;
+    width: 50%;
+    box-sizing: border-box;
+}
+
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border: 4px solid var(--primary); /* Matches navbar's primary color */
+    top: 15px;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.left {
+    left: 0;
+}
+
+.right {
+    left: 50%;
+}
+
+.left::after {
+    right: -12px;
+}
+
+.right::after {
+    left: -12px;
+}
+
+.timeline-content {
+    padding: 20px;
+    background-color: white;
+    position: relative;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Timeline */
+@media (max-width: 768px) {
+    .timeline::after {
+        left: 31px;
+    }
+
+    .timeline-item {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+    }
+
+    .timeline-item::after {
+        left: 21px;
+    }
+
+    .right {
+        left: 0;
+    }
+}
+    </style>
+</head>
+<body class="bg-gray-50 overflow-x-hidden w-full">
+    <!-- Header/Navigation -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center">
+                <i class="fas fa-hotel text-secondary text-3xl mr-2"></i>
+                <span class="text-2xl font-bold text-primary">Lux<span class="text-secondary">Stay</span></span>
+            </div>
+            
+            <nav class="hidden md:flex space-x-8">
+                <a href="Home.html" class="text-primary font-semibold hover:text-secondary">Home</a>
+                <a href="Room.html" class="text-gray-600 hover:text-secondary">Rooms</a>
+                <a href="About.html" class="text-gray-600 hover:text-secondary">About</a>
+                <a href="Our Services.html" class="text-gray-600 hover:text-secondary">Services</a>
+                <a href="contact.html" class="text-gray-600 hover:text-secondary">Contact</a>
+            </nav>
+            
+            <div class="flex items-center space-x-4">
+                <button class="bg-white text-primary font-medium px-4 py-2 rounded-lg border border-gray-300 hover:bg-gray-50">Sign In</button>
+                <button class="bg-secondary text-white font-medium px-4 py-2 rounded-lg hover:bg-blue-500">Register</button>
+                <button class="md:hidden text-primary text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="about-hero py-28 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6">Our Story</h1>
+            <p class="text-xl max-w-2xl mx-auto">Discover the journey behind LuxStay and our commitment to redefining luxury travel experiences</p>
+        </div>
+    </section>
+
+    <!-- Our Story Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center mb-16">
+                <h2 class="text-3xl font-bold text-primary mb-6">Who We Are</h2>
+                <p class="text-gray-600 text-lg mb-6">LuxStay was born from a simple idea: travel should be effortless, luxurious, and memorable. Founded in 2010 by travel enthusiasts, we've grown from a small startup to a global leader in luxury hotel bookings.</p>
+                <p class="text-gray-600 text-lg">Today, we connect discerning travelers with exceptional accommodations in over 120 countries, offering unparalleled service, exclusive deals, and a seamless booking experience.</p>
+            </div>
+            
+            <div class="timeline">
+                <!-- Timeline Item 1 -->
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <div class="text-secondary font-bold">2010</div>
+                        <h3 class="text-xl font-bold text-primary mb-2">The Beginning</h3>
+                        <p class="text-gray-600">Founded in a small apartment with a vision to transform luxury travel. Our first booking was a boutique hotel in Bali.</p>
+                    </div>
+                </div>
+                
+                <!-- Timeline Item 2 -->
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <div class="text-secondary font-bold">2014</div>
+                        <h3 class="text-xl font-bold text-primary mb-2">Global Expansion</h3>
+                        <p class="text-gray-600">Expanded to 30 countries and launched our award-winning mobile app, making luxury travel accessible anywhere.</p>
+                    </div>
+                </div>
+                
+                <!-- Timeline Item 3 -->
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <div class="text-secondary font-bold">2018</div>
+                        <h3 class="text-xl font-bold text-primary mb-2">Sustainability Initiative</h3>
+                        <p class="text-gray-600">Launched our Green Stay program, partnering with eco-friendly hotels and promoting sustainable tourism.</p>
+                    </div>
+                </div>
+                
+                <!-- Timeline Item 4 -->
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <div class="text-secondary font-bold">2023</div>
+                        <h3 class="text-xl font-bold text-primary mb-2">Today & Beyond</h3>
+                        <p class="text-gray-600">Serving over 1 million travelers annually with a curated collection of 15,000+ luxury properties worldwide.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Mission & Values -->
+    <section class="py-20 bg-gradient-to-br from-blue-50 to-cyan-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-primary mb-4">Our Mission & Values</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">At LuxStay, we're driven by core principles that shape every aspect of our service</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Value 1 -->
+                <div class="mission-card bg-white p-8 text-center">
+                    <div class="value-icon bg-blue-100 text-blue-600">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-3">Transparency</h3>
+                    <p class="text-gray-600">No hidden fees or surprises. What you see is what you pay, with all costs clearly outlined upfront.</p>
+                </div>
+                
+                <!-- Value 2 -->
+                <div class="mission-card bg-white p-8 text-center">
+                    <div class="value-icon bg-cyan-100 text-cyan-600">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-3">Customer-First</h3>
+                    <p class="text-gray-600">24/7 dedicated support with real humans ready to assist you anytime, anywhere in the world.</p>
+                </div>
+                
+                <!-- Value 3 -->
+                <div class="mission-card bg-white p-8 text-center">
+                    <div class="value-icon bg-green-100 text-green-600">
+                        <i class="fas fa-tag"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-3">Best Price Guarantee</h3>
+                    <p class="text-gray-600">We're committed to offering the most competitive rates with our price match promise.</p>
+                </div>
+                
+                <!-- Value 4 -->
+                <div class="mission-card bg-white p-8 text-center">
+                    <div class="value-icon bg-emerald-100 text-emerald-600">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-3">Sustainability</h3>
+                    <p class="text-gray-600">Partnering with eco-friendly hotels to promote responsible tourism and reduce our footprint.</p>
+                </div>
+            </div>
+            
+            <div class="max-w-3xl mx-auto mt-16 bg-white rounded-xl p-8 shadow-md">
+                <h3 class="text-2xl font-bold text-primary mb-4 text-center">Our Commitment</h3>
+                <p class="text-gray-600 mb-6">At LuxStay, we believe luxury travel should be both extraordinary and responsible. We carefully vet every property to ensure it meets our high standards for quality, service, and sustainability.</p>
+                <p class="text-gray-600">Our team of travel experts personally visits properties to experience them firsthand, ensuring we recommend only the finest accommodations that align with our values and your expectations.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-primary mb-4">Meet Our Leadership</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">The passionate team driving LuxStay's vision forward</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <!-- Team Member 1 -->
+                <div class="team-member text-center">
+                    <div class="rounded-full overflow-hidden w-48 h-48 mx-auto mb-6">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" 
+                             alt="Alex Johnson" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-xl font-bold text-primary">Alex Johnson</h3>
+                    <p class="text-secondary mb-3">Founder & CEO</p>
+                    <p class="text-gray-600">Former luxury hotel manager with 15+ years in hospitality industry</p>
+                </div>
+                
+                <!-- Team Member 2 -->
+                <div class="team-member text-center">
+                    <div class="rounded-full overflow-hidden w-48 h-48 mx-auto mb-6">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" 
+                             alt="Sarah Chen" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-xl font-bold text-primary">Sarah Chen</h3>
+                    <p class="text-secondary mb-3">Chief Operations Officer</p>
+                    <p class="text-gray-600">Tech innovator with passion for creating seamless customer experiences</p>
+                </div>
+                
+                <!-- Team Member 3 -->
+                <div class="team-member text-center">
+                    <div class="rounded-full overflow-hidden w-48 h-48 mx-auto mb-6">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" 
+                             alt="Marcus Rivera" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-xl font-bold text-primary">Marcus Rivera</h3>
+                    <p class="text-secondary mb-3">Director of Sustainability</p>
+                    <p class="text-gray-600">Environmental advocate with expertise in sustainable tourism practices</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-20 bg-gradient-to-br from-primary to-gray-900 text-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">Travelers Love LuxStay</h2>
+                <p class="max-w-2xl mx-auto text-blue-100">Hear from our guests about their exceptional experiences</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card rounded-lg p-8">
+                    <div class="flex items-center mb-4">
+                        <div class="w-16 h-16 rounded-full overflow-hidden mr-4">
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" 
+                                 alt="Emily Richardson" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-primary">Emily Richardson</h4>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic">"LuxStay completely transformed how I travel. Their attention to detail and personalized recommendations led me to discover hidden gem hotels I'd never find on my own. The price guarantee saved me $200 on my last booking!"</p>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card rounded-lg p-8">
+                    <div class="flex items-center mb-4">
+                        <div class="w-16 h-16 rounded-full overflow-hidden mr-4">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" 
+                                 alt="David Kim" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-primary">David Kim</h4>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic">"When our flight was canceled at midnight, LuxStay's 24/7 support team rebooked our hotel within 15 minutes. Their commitment to customer service is unmatched in the travel industry. I won't book anywhere else now."</p>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card rounded-lg p-8">
+                    <div class="flex items-center mb-4">
+                        <div class="w-16 h-16 rounded-full overflow-hidden mr-4">
+                            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" 
+                                 alt="Sophia Martinez" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-primary">Sophia Martinez</h4>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic">"As an eco-conscious traveler, I appreciate LuxStay's sustainability focus. Their Green Stay collection helped me find beautiful properties that align with my values without compromising on luxury. The transparency about each hotel's initiatives is fantastic."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-20 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1800&q=80');">
+        <div class="container mx-auto px-4 text-center">
+            <div class="max-w-2xl mx-auto bg-white bg-opacity-90 backdrop-blur-sm p-12 rounded-xl">
+                <h2 class="text-3xl font-bold text-primary mb-6">Ready to Experience Luxury Travel?</h2>
+                <p class="text-gray-600 mb-8">Join thousands of satisfied travelers who have discovered the perfect stay with LuxStay</p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="rooms.html" class="bg-secondary text-white font-semibold py-3 px-8 rounded-lg text-lg hover:bg-blue-600 transition-colors">
+                        Explore Our Rooms
+                    </a>
+                    <a href="contact.html" class="bg-white border-2 border-secondary text-secondary font-semibold py-3 px-8 rounded-lg text-lg hover:bg-blue-50 transition-colors">
+                        Contact Us
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <div class="flex items-center mb-6">
+                        <i class="fas fa-hotel text-secondary text-2xl mr-2"></i>
+                        <span class="text-xl font-bold">Lux<span class="text-secondary">Stay</span></span>
+                    </div>
+                    <p class="text-gray-400 mb-4">Your trusted partner for luxury hotel bookings around the world.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="home.html" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="rooms.html" class="text-gray-400 hover:text-white">Rooms & Suites</a></li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-white">About Us</a></li>
+                        <li><a href="services.html" class="text-gray-400 hover:text-white">Services</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Support</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-white">FAQs</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Terms of Service</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Booking Terms</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Customer Support</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Contact Us</h4>
+                    <ul class="space-y-3 text-gray-400">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-3"></i>
+                            <span>123 Luxury Avenue, Resort City, RC 12345</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-3"></i>
+                            <span>+1 (555) 123-4567</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-3"></i>
+                            <span>info@luxstay.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 text-center text-gray-500">
+                <p>&copy; 2023 LuxStay Hotel Booking. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple animation for timeline items
+        document.addEventListener('DOMContentLoaded', function() {
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = "1";
+                        entry.target.style.transform = "translateY(0)";
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            timelineItems.forEach(item => {
+                item.style.opacity = "0";
+                item.style.transform = "translateY(20px)";
+                item.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+                observer.observe(item);
+            });
+        });
+    </script>
+</body>
+</html>

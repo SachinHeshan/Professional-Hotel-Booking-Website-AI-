@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuxStay - Book Family Suite</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0f172a',
+                        secondary: '#0ea5e9',
+                        accent: '#f97316',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(to bottom, #f0f9ff, #ffffff);
+    }
+
+    .booking-container {
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+        border-radius: 16px;
+        overflow: hidden;
+    }
+
+    .room-hero {
+        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                    url('https://images.unsplash.com/photo-1616594039964-ae9021a400a0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1800&q=80');
+        background-size: cover;
+        background-position: center;
+    }
+
+    .room-gallery {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+        margin-top: 16px;
+    }
+
+    .amenity-item {
+        transition: all 0.3s ease;
+    }
+
+    .amenity-item:hover {
+        transform: translateY(-5px);
+        background-color: #f0f9ff;
+    }
+
+    .btn-primary {
+        background: linear-gradient(to right, #0ea5e9, #0284c7);
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background: linear-gradient(to right, #0284c7, #0ea5e9);
+        transform: translateY(-2px);
+    }
+
+    .form-input:focus {
+        border-color: #0ea5e9;
+        box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.2);
+        outline: none; /* Added for better focus accessibility */
+    }
+
+    .date-input {
+        position: relative;
+    }
+
+    .date-input i {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #6b7280;
+        pointer-events: none; /* Added to prevent icon from blocking input */
+    }
+
+    .summary-card {
+        border-left: 4px solid #0ea5e9;
+    }
+
+    .room-highlight {
+        background: linear-gradient(45deg, #f0f9ff, #e6f7ff);
+        border-left: 4px solid #0ea5e9;
+    }
+
+    @media (max-width: 768px) {
+        .room-gallery {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 480px) {
+        .room-gallery {
+            grid-template-columns: 1fr; /* Added for smaller screens */
+        }
+    }
+</style>
+    </style>
+</head>
+<body class="min-h-screen overflow-x-hidden w-full ">
+    <!-- Header/Navigation -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center">
+                <i class="fas fa-hotel text-secondary text-3xl mr-2"></i>
+                <span class="text-2xl font-bold text-primary">Lux<span class="text-secondary">Stay</span></span>
+            </div>
+            
+            <nav class="hidden md:flex space-x-8">
+                <a href="home.html" class="text-gray-600 hover:text-secondary">Home</a>
+                <a href="rooms.html" class="text-gray-600 hover:text-secondary">Rooms</a>
+                <a href="about.html" class="text-gray-600 hover:text-secondary">About</a>
+                <a href="services.html" class="text-gray-600 hover:text-secondary">Services</a>
+                <a href="contact.html" class="text-gray-600 hover:text-secondary">Contact</a>
+            </nav>
+            
+            <div class="flex items-center space-x-4">
+                <a href="signin.html" class="bg-white text-primary font-medium px-4 py-2 rounded-lg border border-gray-300 hover:bg-gray-50">Sign In</a>
+                <a href="register.html" class="btn-primary text-white font-medium px-4 py-2 rounded-lg">Register</a>
+                <button class="md:hidden text-primary text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="room-hero py-20 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6">Family Suite</h1>
+            <p class="text-xl max-w-2xl mx-auto">Spacious accommodations perfect for families</p>
+        </div>
+    </section>
+
+    <!-- Room Highlights -->
+    <section class="py-8 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-wrap justify-center gap-6">
+                <div class="room-highlight flex items-center p-4 rounded-lg">
+                    <i class="fas fa-users text-secondary text-2xl mr-3"></i>
+                    <div>
+                        <div class="font-bold">Sleeps: 4</div>
+                        <div class="text-sm text-gray-600">Comfortable for families</div>
+                    </div>
+                </div>
+                <div class="room-highlight flex items-center p-4 rounded-lg">
+                    <i class="fas fa-expand-arrows-alt text-secondary text-2xl mr-3"></i>
+                    <div>
+                        <div class="font-bold">75m² Space</div>
+                        <div class="text-sm text-gray-600">Spacious living area</div>
+                    </div>
+                </div>
+                <div class="room-highlight flex items-center p-4 rounded-lg">
+                    <i class="fas fa-bed text-secondary text-2xl mr-3"></i>
+                    <div>
+                        <div class="font-bold">2 Bedrooms</div>
+                        <div class="text-sm text-gray-600">King + 2 Single Beds</div>
+                    </div>
+                </div>
+                <div class="room-highlight flex items-center p-4 rounded-lg">
+                    <i class="fas fa-bath text-secondary text-2xl mr-3"></i>
+                    <div>
+                        <div class="font-bold">2 Bathrooms</div>
+                        <div class="text-sm text-gray-600">Convenient for families</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Container -->
+    <section class="py-16 px-4">
+        <div class="container mx-auto max-w-6xl">
+            <div class="booking-container bg-white">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 p-8">
+                    <!-- Room Details -->
+                    <div>
+                        <h2 class="text-2xl font-bold text-primary mb-6">Suite Details</h2>
+                        
+                        <div class="flex flex-wrap justify-between items-start mb-6">
+                            <div>
+                                <h3 class="text-xl font-bold text-primary">Family Suite</h3>
+                                <div class="flex items-center text-gray-600 mt-1">
+                                    <i class="fas fa-map-marker-alt mr-2"></i>
+                                    <span>Garden View • 75m²</span>
+                                </div>
+                            </div>
+                            <div class="text-2xl font-bold text-primary">$200<span class="text-lg font-normal text-gray-600"> / night</span></div>
+                        </div>
+                        
+                        <p class="text-gray-700 mb-6">
+                            Our spacious Family Suite is perfect for families or groups. Features include a separate master bedroom with king bed, 
+                            a children's room with two single beds, two full bathrooms, and a comfortable living area. 
+                            Enjoy garden views from your private balcony and prepare simple meals in the kitchenette.
+                        </p>
+                        
+                        <div class="flex flex-wrap gap-4 mb-6">
+                            <div class="flex items-center">
+                                <i class="fas fa-user-friends mr-2"></i>
+                                <span>Sleeps: 4</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-bed mr-2"></i>
+                                <span>1 King Bed + 2 Singles</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-bath mr-2"></i>
+                                <span>2 Bathrooms</span>
+                            </div>
+                        </div>
+                        
+                        <h3 class="text-lg font-bold text-primary mb-4">Family-Friendly Amenities</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                            <div class="amenity-item flex items-center p-3 border border-gray-200 rounded-lg">
+                                <i class="fas fa-utensils text-secondary mr-3"></i>
+                                <span>Kitchenette</span>
+                            </div>
+                            <div class="amenity-item flex items-center p-3 border border-gray-200 rounded-lg">
+                                <i class="fas fa-couch text-secondary mr-3"></i>
+                                <span>Living Area</span>
+                            </div>
+                            <div class="amenity-item flex items-center p-3 border border-gray-200 rounded-lg">
+                                <i class="fas fa-tv text-secondary mr-3"></i>
+                                <span>2 Smart TVs</span>
+                            </div>
+                            <div class="amenity-item flex items-center p-3 border border-gray-200 rounded-lg">
+                                <i class="fas fa-snowflake text-secondary mr-3"></i>
+                                <span>Air Conditioning</span>
+                            </div>
+                            <div class="amenity-item flex items-center p-3 border border-gray-200 rounded-lg">
+                                <i class="fas fa-wifi text-secondary mr-3"></i>
+                                <span>Free WiFi</span>
+                            </div>
+                            <div class="amenity-item flex items-center p-3 border border-gray-200 rounded-lg">
+                                <i class="fas fa-gamepad text-secondary mr-3"></i>
+                                <span>Board Games</span>
+                            </div>
+                        </div>
+                        
+                        <h3 class="text-lg font-bold text-primary mb-4">Suite Gallery</h3>
+                        <div class="room-gallery">
+                            <div class="h-32 rounded-lg overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1584132915807-fd1f5fbc078f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" 
+                                     alt="Living area" 
+                                     class="w-full h-full object-cover">
+                            </div>
+                            <div class="h-32 rounded-lg overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1554995207-c18c203602cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" 
+                                     alt="Master bedroom" 
+                                     class="w-full h-full object-cover">
+                            </div>
+                            <div class="h-32 rounded-lg overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1582582621959-48d27397dc69?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" 
+                                     alt="Children's room" 
+                                     class="w-full h-full object-cover">
+                            </div>
+                            <div class="h-32 rounded-lg overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1616595286596-4f0e8d26b8e0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" 
+                                     alt="Bathroom" 
+                                     class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Booking Form -->
+                    <div>
+                        <h2 class="text-2xl font-bold text-primary mb-6">Complete Your Booking</h2>
+                        
+                        <div class="summary-card bg-blue-50 p-6 rounded-lg mb-8">
+                            <h3 class="text-lg font-bold text-primary mb-4">Booking Summary</h3>
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-gray-700">Suite:</span>
+                                <span class="font-medium">Family Suite</span>
+                            </div>
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-gray-700">Nightly Rate:</span>
+                                <span class="font-medium">$200.00</span>
+                            </div>
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-gray-700">Nights:</span>
+                                <span class="font-medium">3</span>
+                            </div>
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-gray-700">Family Discount:</span>
+                                <span class="font-medium text-green-600">-$30.00</span>
+                            </div>
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-gray-700">Taxes & Fees:</span>
+                                <span class="font-medium">$36.00</span>
+                            </div>
+                            <div class="border-t border-gray-300 pt-3 mt-3">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-lg font-bold text-primary">Total:</span>
+                                    <span class="text-xl font-bold text-primary">$606.00</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <form class="space-y-6">
+                            <h3 class="text-lg font-bold text-primary mb-2">Your Stay Dates</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="date-input">
+                                    <label class="block text-gray-700 font-medium mb-2">Check-in</label>
+                                    <input type="date" class="form-input w-full p-4 border border-gray-300 rounded-lg focus:outline-none" required>
+                                    <i class="fas fa-calendar"></i>
+                                </div>
+                                
+                                <div class="date-input">
+                                    <label class="block text-gray-700 font-medium mb-2">Check-out</label>
+                                    <input type="date" class="form-input w-full p-4 border border-gray-300 rounded-lg focus:outline-none" required>
+                                    <i class="fas fa-calendar"></i>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-gray-700 font-medium mb-2">Guests</label>
+                                <select class="form-input w-full p-4 border border-gray-300 rounded-lg focus:outline-none">
+                                    <option>2 Guests</option>
+                                    <option selected>3 Guests</option>
+                                    <option>4 Guests</option>
+                                    <option>5 Guests (extra bed required)</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-gray-700 font-medium mb-2">Children</label>
+                                <select class="form-input w-full p-4 border border-gray-300 rounded-lg focus:outline-none">
+                                    <option selected>0 Children</option>
+                                    <option>1 Child</option>
+                                    <option>2 Children</option>
+                                    <option>3 Children</option>
+                                </select>
+                            </div>
+                            
+                            <h3 class="text-lg font-bold text-primary mb-2">Your Information</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-gray-700 font-medium mb-2">First Name</label>
+                                    <input type="text" class="form-input w-full p-4 border border-gray-300 rounded-lg focus:outline-none" placeholder="John" required>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-gray-700 font-medium mb-2">Last Name</label>
+                                    <input type="text" class="form-input w-full p-4 border border-gray-300 rounded-lg focus:outline-none" placeholder="Doe" required>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-gray-700 font-medium mb-2">Email Address</label>
+                                <input type="email" class="form-input w-full p-4 border border-gray-300 rounded-lg focus:outline-none" placeholder="your@email.com" required>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-gray-700 font-medium mb-2">Phone Number</label>
+                                <input type="tel" class="form-input w-full p-4 border border-gray-300 rounded-lg focus:outline-none" placeholder="+1 (555) 123-4567" required>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-gray-700 font-medium mb-2">Special Requests</label>
+                                <textarea rows="3" class="form-input w-full p-4 border border-gray-300 rounded-lg focus:outline-none" placeholder="Any special requests for your family?"></textarea>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <input type="checkbox" id="terms" class="rounded text-secondary focus:ring-secondary mt-1">
+                                <label for="terms" class="ml-2 text-gray-700">I agree to the <a href="#" class="text-secondary hover:underline">Terms & Conditions</a> and <a href="#" class="text-secondary hover:underline">Cancellation Policy</a></label>
+                            </div>
+                            
+                            <button type="submit" class="btn-primary text-white font-bold py-4 px-8 rounded-lg text-lg w-full">
+                                Complete Booking <i class="fas fa-check-circle ml-2"></i>
+                            </button>
+                            
+                            <p class="text-center text-gray-600 text-sm">
+                                <i class="fas fa-lock text-secondary mr-2"></i> Your information is secure and encrypted
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Family Benefits Section -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
+                <div class="text-center p-6 bg-white rounded-xl shadow-sm">
+                    <div class="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-child text-2xl text-secondary"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-2">Child-Friendly Amenities</h3>
+                    <p class="text-gray-600">Cribs, high chairs, and board games available upon request</p>
+                </div>
+                
+                <div class="text-center p-6 bg-white rounded-xl shadow-sm">
+                    <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-utensils text-2xl text-secondary"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-2">Kitchenette</h3>
+                    <p class="text-gray-600">Prepare simple meals and snacks for your family</p>
+                </div>
+                
+                <div class="text-center p-6 bg-white rounded-xl shadow-sm">
+                    <div class="w-16 h-16 rounded-full bg-amber-100 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-percent text-2xl text-secondary"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-2">Family Discount</h3>
+                    <p class="text-gray-600">Special 15% discount for families staying 3+ nights</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-primary mb-4">Family Experiences</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">What families say about our Family Suite</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-xl shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" 
+                                 alt="The Johnson Family" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-primary">Johnson Family</h4>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic">"The Family Suite was perfect for our vacation! The separate bedrooms gave everyone space, and the kitchenette was great for preparing snacks for the kids. The board games provided were a nice touch for family evenings."</p>
+                </div>
+                
+                <div class="bg-white p-8 rounded-xl shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                            <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" 
+                                 alt="The Rodriguez Family" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-primary">Rodriguez Family</h4>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic">"With two bathrooms, getting ready in the morning was a breeze! The kids loved their room with the twin beds. The living area was perfect for relaxing after a day of exploring. We'll definitely book this suite again."</p>
+                </div>
+                
+                <div class="bg-white p-8 rounded-xl shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                            <img src="https://images.unsplash.com/photo-1583195648430-18b2681307e7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80" 
+                                 alt="The Chen Family" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-primary">Chen Family</h4>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 italic">"The Family Suite exceeded our expectations. Having two bedrooms meant the kids could sleep while we stayed up in the living area. The balcony with garden view was beautiful. The staff even provided extra towels and pillows without us asking!"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-16 bg-gradient-to-r from-secondary to-blue-500 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Questions About Family Stays?</h2>
+            <p class="text-xl mb-10 max-w-2xl mx-auto">Our family travel specialists are ready to help you plan the perfect trip</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="contact.html" class="bg-white text-primary font-semibold py-3 px-8 rounded-lg text-lg hover:bg-gray-100">
+                    <i class="fas fa-headset mr-2"></i> Contact Support
+                </a>
+                <a href="tel:+18001234567" class="bg-transparent border-2 border-white text-white font-semibold py-3 px-8 rounded-lg text-lg hover:bg-white hover:text-primary">
+                    <i class="fas fa-phone mr-2"></i> Call Now
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <div class="flex items-center mb-6">
+                        <i class="fas fa-hotel text-secondary text-2xl mr-2"></i>
+                        <span class="text-xl font-bold">Lux<span class="text-secondary">Stay</span></span>
+                    </div>
+                    <p class="text-gray-400 mb-4">Your trusted partner for luxury hotel bookings around the world.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="home.html" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="rooms.html" class="text-gray-400 hover:text-white">Rooms & Suites</a></li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-white">About Us</a></li>
+                        <li><a href="services.html" class="text-gray-400 hover:text-white">Services</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Support</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-white">FAQs</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Terms of Service</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Booking Terms</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Customer Support</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Newsletter</h4>
+                    <p class="text-gray-400 mb-4">Subscribe for exclusive deals and travel tips</p>
+                    <form class="flex mb-4">
+                        <input type="email" placeholder="Your email" class="px-4 py-3 w-full rounded-l-lg focus:outline-none text-gray-800">
+                        <button class="bg-secondary hover:bg-blue-600 text-white px-4 rounded-r-lg">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                    <p class="text-gray-500 text-sm">We respect your privacy. Unsubscribe at any time.</p>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 text-center text-gray-500">
+                <p>&copy; 2023 LuxStay Hotel Booking. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Form submission handling
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // In a real implementation, this would process the booking
+            alert('Thank you for booking the Family Suite! A confirmation has been sent to your email.');
+        });
+        
+        // Set default dates
+        const today = new Date();
+        const tomorrow = new Date();
+        tomorrow.setDate(today.getDate() + 1);
+        const nextWeek = new Date();
+        nextWeek.setDate(today.getDate() + 7);
+        
+        // Format dates as YYYY-MM-DD
+        function formatDate(date) {
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+        
+        // Set default dates in the form
+        document.querySelectorAll('input[type="date"]')[0].value = formatDate(tomorrow);
+        document.querySelectorAll('input[type="date"]')[1].value = formatDate(nextWeek);
+    </script>
+</body>
+</html>
