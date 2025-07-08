@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuxStay - Rooms & Suites</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0f172a',
+                        secondary: '#0ea5e9',
+                        accent: '#f97316',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+       
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+    body {
+        font-family: 'Poppins', sans-serif;
+        scroll-behavior: smooth;
+    }
+
+    .rooms-hero {
+        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                    url('https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80');
+        background-size: cover;
+        background-position: center;
+    }
+
+    .room-card {
+        transition: all 0.3s ease;
+        overflow: hidden;
+        border-radius: 16px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .room-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15);
+    }
+
+    .room-card img {
+        transition: transform 0.5s ease;
+        width: 100%; /* Added to ensure images are responsive */
+        display: block; /* Added to remove extra space below images */
+    }
+
+    .room-card:hover img {
+        transform: scale(1.05);
+    }
+
+    .amenities-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 16px;
+    }
+
+    .room-gallery {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(2, 200px);
+        gap: 12px;
+        height: 412px;
+    }
+
+    .gallery-main {
+        grid-column: span 2;
+        grid-row: span 2;
+    }
+
+    .amenity-icon {
+        width: 56px;
+        height: 56px;
+        background: rgba(14, 165, 233, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 12px;
+        margin-bottom: 16px;
+    }
+
+    .price-tag {
+        position: absolute;
+        top: 24px;
+        right: 24px;
+        background: rgba(249, 115, 22, 0.95);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 30px;
+        font-weight: 600;
+        box-shadow: 0 4px 10px rgba(249, 115, 22, 0.3);
+    }
+
+    .tab-btn.active {
+        border-bottom: 3px solid #0ea5e9;
+        color: #0ea5e9;
+        font-weight: 600;
+    }
+
+    .booking-card {
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15);
+        border-radius: 16px;
+    }
+
+    .room-detail-item {
+        border-bottom: 1px solid #e5e7eb;
+        padding: 16px 0;
+    }
+
+    .room-detail-item:last-child {
+        border-bottom: none;
+    }
+
+    @media (max-width: 768px) {
+        .room-gallery {
+            grid-template-columns: 1fr;
+            grid-template-rows: 300px 100px 100px;
+            height: auto;
+        }
+
+        .gallery-main {
+            grid-column: span 1;
+            grid-row: span 1;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .amenities-grid {
+            grid-template-columns: 1fr; /* Added for smaller screens */
+        }
+    }
+
+    </style>
+</head>
+<body class="min-h-screen overflow-x-hidden w-full ">
+    <!-- Header/Navigation -->
+    <nav class="bg-white fixed w-full z-20 top-0 start-0 border-b border-gray-200">
+  <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+    <a href="Home.html" class="flex items-center space-x-3 rtl:space-x-reverse">
+      <i class="fas fa-hotel text-secondary text-3xl"></i>
+      <span class="self-center text-2xl font-bold text-primary whitespace-nowrap">
+        Lux<span class="text-secondary">Stay</span>
+      </span>
+    </a>
+
+    <div class="flex items-center space-x-2 md:order-2">
+      <button type="button" onclick="window.location.href='regi-log.html'" class="bg-white text-primary font-medium px-4 py-2 rounded-lg border border-gray-300 hover:bg-gray-50" aria-label="Sign in to your account">
+        Sign In
+      </button>
+      <button type="button" onclick="window.location.href='regi-log.html'" class="bg-secondary text-white font-medium px-4 py-2 rounded-lg hover:bg-secondary-dark" aria-label="Register for a new account">
+        Register
+      </button>
+      <button data-collapse-toggle="navbar-sticky" type="button" class="md:hidden text-primary text-2xl" aria-label="Toggle navigation menu">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+
+    <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
+      <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white">
+        <li>
+          <a href="Home.html" class="block py-2 px-3 text-primary font-semibold hover:text-secondary md:p-0" aria-current="page">Home</a>
+        </li>
+        <li>
+          <a href="Room.html" class="block py-2 px-3 text-gray-600 hover:text-secondary md:p-0">Rooms</a>
+        </li>
+        <li>
+          <a href="About.html" class="block py-2 px-3 text-gray-600 hover:text-secondary md:p-0">About</a>
+        </li>
+        <li>
+          <a href="Our Services.html" class="block py-2 px-3 text-gray-600 hover:text-secondary md:p-0">Services</a>
+        </li>
+        <li>
+          <a href="contact.html" class="block py-2 px-3 text-gray-600 hover:text-secondary md:p-0">Contact</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+    <!-- Hero Section -->
+    <section class="rooms-hero py-28 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6">Rooms & Suites</h1>
+            <p class="text-xl max-w-2xl mx-auto">Experience unparalleled luxury and comfort in our meticulously designed accommodations</p>
+        </div>
+    </section>
+
+    <!-- Room Categories Tabs -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-wrap justify-center gap-4 md:gap-8 mb-12 border-b">
+                <button class="tab-btn active text-lg px-4 py-3" data-category="all">All Rooms</button>
+                <button class="tab-btn text-lg px-4 py-3" data-category="standard">Standard</button>
+                <button class="tab-btn text-lg px-4 py-3" data-category="deluxe">Deluxe</button>
+                <button class="tab-btn text-lg px-4 py-3" data-category="suite">Suites</button>
+                <button class="tab-btn text-lg px-4 py-3" data-category="presidential">Presidential</button>
+            </div>
+            
+            <!-- Room Listing -->
+            <div class="grid grid-cols-1 gap-12">
+                <!-- Room 1 -->
+                <div class="room-card bg-white" data-category="deluxe">
+                    <div class="md:flex">
+                        <div class="md:w-1/2 relative">
+                            <div class="room-gallery">
+                                <div class="gallery-main rounded-l-xl overflow-hidden">
+                                    <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Deluxe Ocean View" class="w-full h-full object-cover">
+                                </div>
+                                <div class="overflow-hidden rounded-tr-xl">
+                                    <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Bathroom" class="w-full h-full object-cover">
+                                </div>
+                                <div class="overflow-hidden">
+                                    <img src="https://images.unsplash.com/photo-1584132967334-10e028bd69f7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Balcony" class="w-full h-full object-cover">
+                                </div>
+                                <div class="overflow-hidden rounded-br-xl">
+                                    <img src="https://images.unsplash.com/photo-1611892440521-5f3a0cdf4ebc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Room View" class="w-full h-full object-cover">
+                                </div>
+                            </div>
+                            <div class="price-tag">
+                                <span class="text-xl">$245</span> <span class="text-sm">/ night</span>
+                            </div>
+                        </div>
+                        <div class="md:w-1/2 p-8">
+                            <div class="flex justify-between items-start mb-4">
+                                <div>
+                                    <h2 class="text-2xl font-bold text-primary">Deluxe Ocean View</h2>
+                                    <div class="flex items-center text-gray-600 mt-2">
+                                        <i class="fas fa-map-marker-alt mr-2 text-secondary"></i>
+                                        <span>Floors 3-8 • 45 sqm</span>
+                                    </div>
+                                </div>
+                                <span class="bg-secondary text-white text-sm py-1 px-3 rounded-full">4.8</span>
+                            </div>
+                            
+                            <p class="text-gray-700 mb-6">Wake up to breathtaking ocean views in our spacious Deluxe rooms. Features a king-sized bed, modern workspace, and luxurious marble bathroom.</p>
+                            
+                            <div class="amenities-grid mb-8">
+                                <div class="flex items-center">
+                                    <i class="fas fa-wifi text-secondary mr-2"></i>
+                                    <span>Free WiFi</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-coffee text-secondary mr-2"></i>
+                                    <span>Coffee Maker</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-tv text-secondary mr-2"></i>
+                                    <span>Smart TV</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-snowflake text-secondary mr-2"></i>
+                                    <span>Air Conditioning</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-wind text-secondary mr-2"></i>
+                                    <span>Balcony</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-bath text-secondary mr-2"></i>
+                                    <span>Rain Shower</span>
+                                </div>
+                            </div>
+                            
+                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                                <div>
+                                    <span class="text-xl font-bold text-primary">$245</span>
+                                    <span class="text-gray-500 line-through ml-2">$290</span>
+                                    <span class="text-gray-600 text-sm ml-2">/ night</span>
+                                    <p class="text-sm text-gray-600">Includes taxes & fees</p>
+                                </div>
+                                <button class="bg-secondary hover:bg-blue-500 text-white font-semibold py-3 px-6 rounded-lg transition-all">
+                                    Book Now <i class="fas fa-arrow-right ml-2"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Room 2 -->
+                <div class="room-card bg-white" data-category="suite">
+                    <div class="md:flex flex-row-reverse">
+                        <div class="md:w-1/2 relative">
+                            <div class="room-gallery">
+                                <div class="gallery-main rounded-r-xl overflow-hidden">
+                                    <img src="https://images.unsplash.com/photo-1578683010236-d716f9a3f461?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Executive Suite" class="w-full h-full object-cover">
+                                </div>
+                                <div class="overflow-hidden rounded-tl-xl">
+                                    <img src="https://images.unsplash.com/photo-1616486029423-aaa4789e8c9a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Living Area" class="w-full h-full object-cover">
+                                </div>
+                                <div class="overflow-hidden">
+                                    <img src="https://images.unsplash.com/photo-1592229505726-cf121663d0d5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Dining Area" class="w-full h-full object-cover">
+                                </div>
+                                <div class="overflow-hidden rounded-bl-xl">
+                                    <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Bedroom" class="w-full h-full object-cover">
+                                </div>
+                            </div>
+                            <div class="price-tag">
+                                <span class="text-xl">$395</span> <span class="text-sm">/ night</span>
+                            </div>
+                        </div>
+                        <div class="md:w-1/2 p-8">
+                            <div class="flex justify-between items-start mb-4">
+                                <div>
+                                    <h2 class="text-2xl font-bold text-primary">Executive Suite</h2>
+                                    <div class="flex items-center text-gray-600 mt-2">
+                                        <i class="fas fa-map-marker-alt mr-2 text-secondary"></i>
+                                        <span>Floors 9-12 • 85 sqm</span>
+                                    </div>
+                                </div>
+                                <span class="bg-secondary text-white text-sm py-1 px-3 rounded-full">4.9</span>
+                            </div>
+                            
+                            <p class="text-gray-700 mb-6">Indulge in luxury with separate living and sleeping areas, a private dining space, and panoramic city views. Perfect for extended stays or business travelers.</p>
+                            
+                            <div class="amenities-grid mb-8">
+                                <div class="flex items-center">
+                                    <i class="fas fa-wifi text-secondary mr-2"></i>
+                                    <span>Premium WiFi</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-utensils text-secondary mr-2"></i>
+                                    <span>Kitchenette</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-couch text-secondary mr-2"></i>
+                                    <span>Living Area</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-hot-tub text-secondary mr-2"></i>
+                                    <span>Jacuzzi</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-wine-bottle text-secondary mr-2"></i>
+                                    <span>Minibar</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-concierge-bell text-secondary mr-2"></i>
+                                    <span>Butler Service</span>
+                                </div>
+                            </div>
+                            
+                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                                <div>
+                                    <span class="text-xl font-bold text-primary">$395</span>
+                                    <span class="text-gray-600 text-sm ml-2">/ night</span>
+                                    <p class="text-sm text-gray-600">Includes taxes, fees & breakfast</p>
+                                </div>
+                                <button class="bg-secondary hover:bg-blue-500 text-white font-semibold py-3 px-6 rounded-lg transition-all">
+                                    Book Now <i class="fas fa-arrow-right ml-2"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Room 3 -->
+                <div class="room-card bg-white" data-category="presidential">
+                    <div class="md:flex">
+                        <div class="md:w-1/2 relative">
+                            <div class="room-gallery">
+                                <div class="gallery-main rounded-l-xl overflow-hidden">
+                                    <img src="https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Presidential Suite" class="w-full h-full object-cover">
+                                </div>
+                                <div class="overflow-hidden rounded-tr-xl">
+                                    <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Master Bedroom" class="w-full h-full object-cover">
+                                </div>
+                                <div class="overflow-hidden">
+                                    <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Lounge" class="w-full h-full object-cover">
+                                </div>
+                                <div class="overflow-hidden rounded-br-xl">
+                                    <img src="https://images.unsplash.com/photo-1584132915807-fd1f5fbc078f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Bathroom" class="w-full h-full object-cover">
+                                </div>
+                            </div>
+                            <div class="price-tag">
+                                <span class="text-xl">$895</span> <span class="text-sm">/ night</span>
+                            </div>
+                        </div>
+                        <div class="md:w-1/2 p-8">
+                            <div class="flex justify-between items-start mb-4">
+                                <div>
+                                    <h2 class="text-2xl font-bold text-primary">Presidential Suite</h2>
+                                    <div class="flex items-center text-gray-600 mt-2">
+                                        <i class="fas fa-map-marker-alt mr-2 text-secondary"></i>
+                                        <span>Penthouse • 220 sqm</span>
+                                    </div>
+                                </div>
+                                <span class="bg-secondary text-white text-sm py-1 px-3 rounded-full">5.0</span>
+                            </div>
+                            
+                            <p class="text-gray-700 mb-6">The ultimate in luxury living. This expansive suite features a private elevator, dining room for 8, library, and a spa bathroom with panoramic city views.</p>
+                            
+                            <div class="amenities-grid mb-8">
+                                <div class="flex items-center">
+                                    <i class="fas fa-swimming-pool text-secondary mr-2"></i>
+                                    <span>Private Pool</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-dumbbell text-secondary mr-2"></i>
+                                    <span>Private Gym</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-spa text-secondary mr-2"></i>
+                                    <span>In-suite Spa</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-car text-secondary mr-2"></i>
+                                    <span>Chauffeured Car</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-concierge-bell text-secondary mr-2"></i>
+                                    <span>24/7 Butler</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-crown text-secondary mr-2"></i>
+                                    <span>VIP Services</span>
+                                </div>
+                            </div>
+                            
+                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                                <div>
+                                    <span class="text-xl font-bold text-primary">$895</span>
+                                    <span class="text-gray-600 text-sm ml-2">/ night</span>
+                                    <p class="text-sm text-gray-600">All inclusive luxury experience</p>
+                                </div>
+                                <button class="bg-secondary hover:bg-blue-500 text-white font-semibold py-3 px-6 rounded-lg transition-all">
+                                    Book Now <i class="fas fa-arrow-right ml-2"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Amenities Section -->
+    <section class="py-16 bg-gradient-to-br from-blue-50 to-cyan-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-primary mb-4">Premium Amenities</h2>
+                <p class="text-gray-700 max-w-2xl mx-auto">Enjoy exceptional comfort and convenience with our thoughtfully curated amenities</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white p-8 rounded-xl text-center shadow-sm">
+                    <div class="amenity-icon mx-auto">
+                        <i class="fas fa-swimmer text-secondary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-3">Infinity Pool</h3>
+                    <p class="text-gray-700">Stunning rooftop pool with panoramic views and poolside service</p>
+                </div>
+                
+                <div class="bg-white p-8 rounded-xl text-center shadow-sm">
+                    <div class="amenity-icon mx-auto">
+                        <i class="fas fa-spa text-secondary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-3">Luxury Spa</h3>
+                    <p class="text-gray-700">Rejuvenating treatments and wellness therapies for ultimate relaxation</p>
+                </div>
+                
+                <div class="bg-white p-8 rounded-xl text-center shadow-sm">
+                    <div class="amenity-icon mx-auto">
+                        <i class="fas fa-utensils text-secondary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-3">Gourmet Dining</h3>
+                    <p class="text-gray-700">Award-winning restaurants featuring international and local cuisine</p>
+                </div>
+                
+                <div class="bg-white p-8 rounded-xl text-center shadow-sm">
+                    <div class="amenity-icon mx-auto">
+                        <i class="fas fa-dumbbell text-secondary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-3">Fitness Center</h3>
+                    <p class="text-gray-700">State-of-the-art equipment with personal training sessions available</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking CTA -->
+    <section class="py-16 bg-gradient-to-r from-primary to-secondary text-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <div class="booking-card bg-white text-gray-800 p-8 md:p-12">
+                    <div class="md:flex items-center">
+                        <div class="md:w-2/3 mb-8 md:mb-0 md:pr-8">
+                            <h2 class="text-2xl md:text-3xl font-bold text-primary mb-4">Ready to Experience Luxury?</h2>
+                            <p class="text-gray-700 mb-6">Book your stay with LuxStay today and enjoy exclusive member benefits and special offers.</p>
+                            <div class="flex flex-wrap gap-3">
+                                <div class="bg-blue-50 text-secondary px-4 py-2 rounded-lg">
+                                    <i class="fas fa-gift mr-2"></i> Welcome drink
+                                </div>
+                                <div class="bg-blue-50 text-secondary px-4 py-2 rounded-lg">
+                                    <i class="fas fa-utensils mr-2"></i> Breakfast included
+                                </div>
+                                <div class="bg-blue-50 text-secondary px-4 py-2 rounded-lg">
+                                    <i class="fas fa-clock mr-2"></i> Late checkout
+                                </div>
+                            </div>
+                        </div>
+                        <div class="md:w-1/3 text-center">
+                            <button class="w-full bg-secondary hover:bg-blue-500 text-white font-semibold py-4 px-6 rounded-lg text-lg transition-all">
+                                Book Your Stay
+                            </button>
+                            <p class="text-gray-600 mt-4 text-sm">Or call us: <span class="text-primary font-semibold">+1 (888) 123-4567</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <div class="flex items-center mb-6">
+                        <i class="fas fa-hotel text-secondary text-2xl mr-2"></i>
+                        <span class="text-xl font-bold">Lux<span class="text-secondary">Stay</span></span>
+                    </div>
+                    <p class="text-gray-400 mb-4">Your trusted partner for luxury hotel bookings around the world.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="Home.html" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="Room.html" class="text-secondary">Rooms & Suites</a></li>
+                        <li><a href="gallery.html" class="text-gray-400 hover:text-white">Gallery</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Special Offers</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-white">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Support</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-white">FAQs</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Terms of Service</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Booking Terms</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Customer Support</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Newsletter</h4>
+                    <p class="text-gray-400 mb-4">Subscribe to get special offers and travel tips</p>
+                    <form class="flex">
+                        <input type="email" placeholder="Your email" class="px-4 py-2 w-full rounded-l-lg focus:outline-none text-gray-800">
+                        <button class="bg-secondary hover:bg-blue-500 text-white px-4 rounded-r-lg">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 text-center text-gray-500">
+                <p>&copy; 2023 LuxStay Hotel Booking. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab filtering functionality
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const roomCards = document.querySelectorAll('.room-card');
+            
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Remove active class from all buttons
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    btn.classList.add('active');
+                    
+                    const category = btn.getAttribute('data-category');
+                    
+                    // Show/hide room cards based on category
+                    roomCards.forEach(card => {
+                        if (category === 'all' || card.getAttribute('data-category') === category) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // Book now buttons functionality
+            const bookButtons = document.querySelectorAll('.room-card button');
+            bookButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const roomName = this.closest('.room-card').querySelector('h2').textContent;
+                    alert(`Booking system would open for: ${roomName}\nFor this demo, we're showing this alert.`);
+                });
+            });
+            
+            // Mobile menu toggle
+            const mobileMenuBtn = document.querySelector('.md\\:hidden');
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    const nav = document.querySelector('nav');
+                    nav.classList.toggle('hidden');
+                    nav.classList.toggle('flex');
+                    nav.classList.toggle('flex-col');
+                    nav.classList.toggle('absolute');
+                    nav.classList.toggle('top-full');
+                    nav.classList.toggle('left-0');
+                    nav.classList.toggle('right-0');
+                    nav.classList.toggle('bg-white');
+                    nav.classList.toggle('p-4');
+                    nav.classList.toggle('space-y-4');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

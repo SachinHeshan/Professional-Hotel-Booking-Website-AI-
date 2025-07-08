@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuxStay - Contact Us</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0f172a',
+                        secondary: '#0ea5e9',
+                        accent: '#f97316',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+       /* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* CSS Variables for consistency with navbar, about, and services pages */
+:root {
+    --primary: #1d4ed8; /* Matches Tailwind's blue-600 or navbar's text-primary */
+    --secondary: #f59e0b; /* Matches Tailwind's yellow-500 or navbar's text-secondary */
+    --primary-dark: #0284c7; /* For btn-submit gradient */
+}
+
+/* General body styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+}
+
+/* Contact Hero Section */
+.contact-hero {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+                      url('https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1800&q=80');
+    background-size: cover;
+    background-position: center;
+}
+
+/* Contact Card */
+.contact-card {
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.contact-card:hover {
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px);
+}
+
+/* Contact Info */
+.contact-info {
+    transition: all 0.3s ease;
+}
+
+.contact-info:hover {
+    transform: translateX(5px);
+}
+
+/* Social Icon (for Font Awesome icons) */
+.social-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    background-color: var(--primary); /* Matches navbar's primary color */
+    color: white; /* Ensures icon visibility */
+}
+
+.social-icon:hover {
+    transform: translateY(-5px);
+    background-color: var(--primary-dark); /* Slightly darker on hover */
+}
+
+/* Map Container */
+.map-container {
+    border-radius: 16px;
+    overflow: hidden;
+    height: 400px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Input Focus */
+.form-input:focus {
+    border-color: var(--primary); /* Matches navbar's primary color */
+    box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.2); /* Adjusted to --primary */
+}
+
+/* Submit Button */
+.btn-submit {
+    background: linear-gradient(to right, var(--primary), var(--primary-dark));
+    transition: all 0.3s ease;
+}
+
+.btn-submit:hover {
+    background: linear-gradient(to right, var(--primary-dark), var(--primary));
+    transform: translateY(-2px);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .map-container {
+        height: 300px; /* Reduced height for mobile */
+    }
+}
+    </style>
+</head>
+<body class="min-h-screen overflow-x-hidden w-full ">
+    <!-- Header/Navigation -->
+    <nav class="bg-white fixed w-full z-20 top-0 start-0 border-b border-gray-200">
+  <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+    <a href="Home.html" class="flex items-center space-x-3 rtl:space-x-reverse">
+      <i class="fas fa-hotel text-secondary text-3xl"></i>
+      <span class="self-center text-2xl font-bold text-primary whitespace-nowrap">
+        Lux<span class="text-secondary">Stay</span>
+      </span>
+    </a>
+
+    <div class="flex items-center space-x-2 md:order-2">
+      <button type="button" onclick="window.location.href='regi-log.html'" class="bg-white text-primary font-medium px-4 py-2 rounded-lg border border-gray-300 hover:bg-gray-50" aria-label="Sign in to your account">
+        Sign In
+      </button>
+      <button type="button" onclick="window.location.href='regi-log.html'" class="bg-secondary text-white font-medium px-4 py-2 rounded-lg hover:bg-secondary-dark" aria-label="Register for a new account">
+        Register
+      </button>
+      <button data-collapse-toggle="navbar-sticky" type="button" class="md:hidden text-primary text-2xl" aria-label="Toggle navigation menu">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+
+    <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
+      <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white">
+        <li>
+          <a href="Home.html" class="block py-2 px-3 text-primary font-semibold hover:text-secondary md:p-0" aria-current="page">Home</a>
+        </li>
+        <li>
+          <a href="Room.html" class="block py-2 px-3 text-gray-600 hover:text-secondary md:p-0">Rooms</a>
+        </li>
+        <li>
+          <a href="About.html" class="block py-2 px-3 text-gray-600 hover:text-secondary md:p-0">About</a>
+        </li>
+        <li>
+          <a href="Our Services.html" class="block py-2 px-3 text-gray-600 hover:text-secondary md:p-0">Services</a>
+        </li>
+        <li>
+          <a href="contact.html" class="block py-2 px-3 text-gray-600 hover:text-secondary md:p-0">Contact</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+    <!-- Hero Section -->
+    <section class="contact-hero py-28 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6">Contact Us</h1>
+            <p class="text-xl max-w-2xl mx-auto">We're here to help you plan your perfect stay. Reach out to us anytime!</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="py-20">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+                <!-- Contact Form -->
+                <div class="contact-card bg-white p-8">
+                    <h2 class="text-2xl font-bold text-primary mb-8">Send Us a Message</h2>
+                    <form class="space-y-6">
+                        <div>
+                            <label class="block text-gray-700 font-medium mb-2">Full Name <span class="text-red-500">*</span></label>
+                            <input type="text" class="form-input w-full p-4 border border-gray-300 rounded-lg focus:outline-none" placeholder="Your name" required>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-gray-700 font-medium mb-2">Email Address <span class="text-red-500">*</span></label>
+                                <input type="email" class="form-input w-full p-4 border border-gray-300 rounded-lg focus:outline-none" placeholder="your@email.com" required>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-gray-700 font-medium mb-2">Phone Number</label>
+                                <input type="tel" class="form-input w-full p-4 border border-gray-300 rounded-lg focus:outline-none" placeholder="+1 (555) 123-4567">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-gray-700 font-medium mb-2">Subject</label>
+                            <select class="form-input w-full p-4 border border-gray-300 rounded-lg focus:outline-none">
+                                <option>General Inquiry</option>
+                                <option>Booking Assistance</option>
+                                <option>Corporate Services</option>
+                                <option>Feedback & Suggestions</option>
+                                <option>Technical Support</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-gray-700 font-medium mb-2">Your Message <span class="text-red-500">*</span></label>
+                            <textarea rows="6" class="form-input w-full p-4 border border-gray-300 rounded-lg focus:outline-none" placeholder="How can we help you?" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn-submit text-white font-bold py-4 px-8 rounded-lg text-lg w-full">
+                            Send Message <i class="fas fa-paper-plane ml-2"></i>
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Contact Information -->
+                <div class="space-y-8">
+                    <div class="contact-card bg-gradient-to-br from-primary to-gray-900 text-white p-8">
+                        <h2 class="text-2xl font-bold mb-6">Get In Touch</h2>
+                        
+                        <div class="space-y-6">
+                            <div class="contact-info flex items-start">
+                                <div class="bg-secondary p-3 rounded-lg mr-4">
+                                    <i class="fas fa-envelope text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold">Email Address</h3>
+                                    <p class="text-blue-100">support@luxstay.com</p>
+                                    <p class="text-blue-100">bookings@luxstay.com</p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-info flex items-start">
+                                <div class="bg-secondary p-3 rounded-lg mr-4">
+                                    <i class="fas fa-phone-alt text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold">Phone Number</h3>
+                                    <p class="text-blue-100">+1 (800) 123-4567</p>
+                                    <p class="text-blue-100 text-sm">24/7 Customer Support</p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-info flex items-start">
+                                <div class="bg-secondary p-3 rounded-lg mr-4">
+                                    <i class="fas fa-comments text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold">Live Chat</h3>
+                                    <p class="text-blue-100">Available 8AM - 10PM EST</p>
+                                    <button class="mt-2 bg-secondary hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg transition-colors">
+                                        Start Live Chat
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-info flex items-start">
+                                <div class="bg-secondary p-3 rounded-lg mr-4">
+                                    <i class="fas fa-map-marker-alt text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold">Headquarters</h3>
+                                    <p class="text-blue-100">123 Luxury Avenue</p>
+                                    <p class="text-blue-100">Resort City, RC 12345</p>
+                                    <p class="text-blue-100">United States</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8">
+                            <h3 class="text-lg font-bold mb-4">Business Hours</h3>
+                            <div class="grid grid-cols-2 gap-4 text-blue-100">
+                                <div>Monday - Friday</div>
+                                <div class="font-medium">8:00 AM - 8:00 PM</div>
+                                <div>Saturday</div>
+                                <div class="font-medium">9:00 AM - 6:00 PM</div>
+                                <div>Sunday</div>
+                                <div class="font-medium">10:00 AM - 4:00 PM</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Social Media -->
+                    <div class="contact-card bg-white p-8">
+                        <h2 class="text-2xl font-bold text-primary mb-6">Connect With Us</h2>
+                        <p class="text-gray-600 mb-6">Follow us on social media for travel tips, special offers, and exclusive deals.</p>
+                        
+                        <div class="flex flex-wrap gap-4">
+                            <a href="#" class="social-icon bg-blue-600 text-white hover:bg-blue-700">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="social-icon bg-pink-600 text-white hover:bg-pink-700">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="social-icon bg-blue-400 text-white hover:bg-blue-500">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="social-icon bg-blue-700 text-white hover:bg-blue-800">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#" class="social-icon bg-green-500 text-white hover:bg-green-600">
+                                <i class="fab fa-whatsapp"></i>
+                            </a>
+                            <a href="#" class="social-icon bg-red-600 text-white hover:bg-red-700">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-primary mb-4">Find Our Headquarters</h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto">Visit us at our main office to discuss your travel needs in person</p>
+                </div>
+                
+                <div class="map-container">
+                    <!-- Embedded Google Map -->
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.184133404672!2d-73.9875748245223!3d40.75802887138714!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25855c6480299%3A0x55194ec5a1ae072e!2sTimes%20Square!5e0!3m2!1sen!2sus!4v1690834423275!5m2!1sen!2sus" 
+                        width="100%" 
+                        height="100%" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8 text-center">
+                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <i class="fas fa-car text-3xl text-secondary mb-4"></i>
+                        <h3 class="text-lg font-bold text-primary mb-2">Parking Information</h3>
+                        <p class="text-gray-600">Underground parking available with validation</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <i class="fas fa-subway text-3xl text-secondary mb-4"></i>
+                        <h3 class="text-lg font-bold text-primary mb-2">Public Transport</h3>
+                        <p class="text-gray-600">Times Square subway station (N, Q, R, W, 1, 2, 3, 7)</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <i class="fas fa-clock text-3xl text-secondary mb-4"></i>
+                        <h3 class="text-lg font-bold text-primary mb-2">Visiting Hours</h3>
+                        <p class="text-gray-600">Monday-Friday: 9AM-5PM, Saturday: 10AM-2PM</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl font-bold text-primary mb-4">Frequently Asked Questions</h2>
+                    <p class="text-gray-600">Find answers to common questions about our services</p>
+                </div>
+                
+                <div class="space-y-6">
+                    <div class="border border-gray-200 rounded-lg overflow-hidden">
+                        <button class="faq-question flex justify-between items-center w-full p-6 text-left font-bold text-primary hover:bg-gray-50">
+                            <span>How do I modify or cancel my reservation?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer p-6 bg-gray-50 hidden">
+                            <p class="text-gray-600">You can modify or cancel your reservation through our website or mobile app. Log in to your account, go to "My Bookings," and follow the prompts. Most reservations can be cancelled for free up to 48 hours before check-in.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="border border-gray-200 rounded-lg overflow-hidden">
+                        <button class="faq-question flex justify-between items-center w-full p-6 text-left font-bold text-primary hover:bg-gray-50">
+                            <span>What is your price match guarantee?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer p-6 bg-gray-50 hidden">
+                            <p class="text-gray-600">If you find a lower price for the same room, on the same dates, at the same hotel on another website within 24 hours of booking, we'll match that price and give you an additional 10% discount. Contact our customer support with proof of the lower rate.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="border border-gray-200 rounded-lg overflow-hidden">
+                        <button class="faq-question flex justify-between items-center w-full p-6 text-left font-bold text-primary hover:bg-gray-50">
+                            <span>How do I join your loyalty program?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer p-6 bg-gray-50 hidden">
+                            <p class="text-gray-600">Signing up is free and easy! Simply create an account on our website or mobile app, and you'll automatically be enrolled in our LuxStay Rewards program. You'll start earning points immediately on all eligible bookings.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="border border-gray-200 rounded-lg overflow-hidden">
+                        <button class="faq-question flex justify-between items-center w-full p-6 text-left font-bold text-primary hover:bg-gray-50">
+                            <span>What payment methods do you accept?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer p-6 bg-gray-50 hidden">
+                            <p class="text-gray-600">We accept all major credit cards including Visa, Mastercard, American Express, and Discover. We also accept payments through PayPal and Apple Pay. Some hotels may accept additional payment methods at check-in.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-16 bg-gradient-to-r from-secondary to-blue-500 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Need Immediate Assistance?</h2>
+            <p class="text-xl mb-10 max-w-2xl mx-auto">Our customer support team is available 24/7 to help with your booking</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="tel:+18001234567" class="bg-white text-primary font-semibold py-3 px-8 rounded-lg text-lg hover:bg-gray-100">
+                    <i class="fas fa-phone mr-2"></i> Call Now: (800) 123-4567
+                </a>
+                <a href="#" class="bg-transparent border-2 border-white text-white font-semibold py-3 px-8 rounded-lg text-lg hover:bg-white hover:text-primary">
+                    <i class="fas fa-comment mr-2"></i> Start Live Chat
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <div class="flex items-center mb-6">
+                        <i class="fas fa-hotel text-secondary text-2xl mr-2"></i>
+                        <span class="text-xl font-bold">Lux<span class="text-secondary">Stay</span></span>
+                    </div>
+                    <p class="text-gray-400 mb-4">Your trusted partner for luxury hotel bookings around the world.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="home.html" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="rooms.html" class="text-gray-400 hover:text-white">Rooms & Suites</a></li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-white">About Us</a></li>
+                        <li><a href="services.html" class="text-gray-400 hover:text-white">Services</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Support</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-white">FAQs</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Terms of Service</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Booking Terms</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Customer Support</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Newsletter</h4>
+                    <p class="text-gray-400 mb-4">Subscribe for exclusive deals and travel tips</p>
+                    <form class="flex mb-4">
+                        <input type="email" placeholder="Your email" class="px-4 py-3 w-full rounded-l-lg focus:outline-none text-gray-800">
+                        <button class="bg-secondary hover:bg-blue-600 text-white px-4 rounded-r-lg">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                    <p class="text-gray-500 text-sm">We respect your privacy. Unsubscribe at any time.</p>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 text-center text-gray-500">
+                <p>&copy; 2023 LuxStay Hotel Booking. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Form submission handling
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! In a real implementation, this would be sent to our servers.');
+            this.reset();
+        });
+        
+        // FAQ accordion functionality
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', function() {
+                const answer = this.nextElementSibling;
+                const isOpen = answer.classList.contains('hidden');
+                
+                // Close all answers
+                document.querySelectorAll('.faq-answer').forEach(ans => {
+                    ans.classList.add('hidden');
+                });
+                
+                // Reset all icons
+                document.querySelectorAll('.faq-question i').forEach(icon => {
+                    icon.classList.remove('fa-chevron-up');
+                    icon.classList.add('fa-chevron-down');
+                });
+                
+                // Toggle current answer
+                if (isOpen) {
+                    answer.classList.remove('hidden');
+                    this.querySelector('i').classList.remove('fa-chevron-down');
+                    this.querySelector('i').classList.add('fa-chevron-up');
+                }
+            });
+        });
+        
+        // Animation for contact cards
+        document.addEventListener('DOMContentLoaded', function() {
+            const contactCards = document.querySelectorAll('.contact-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = "1";
+                        entry.target.style.transform = "translateY(0)";
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            contactCards.forEach(card => {
+                card.style.opacity = "0";
+                card.style.transform = "translateY(20px)";
+                card.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>

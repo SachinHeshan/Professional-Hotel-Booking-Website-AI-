@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuxStay - All Hotels</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0f172a',
+                        secondary: '#0ea5e9',
+                        accent: '#f97316',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+       
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(to bottom, #f0f9ff, #ffffff);
+    }
+
+    .hotel-hero {
+        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                    url('https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1800&q=80');
+        background-size: cover;
+        background-position: center;
+    }
+
+    .hotel-card {
+        transition: all 0.3s ease;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .hotel-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15);
+    }
+
+    .filter-card {
+        border-radius: 16px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    .amenity-badge {
+        transition: all 0.3s ease;
+    }
+
+    .amenity-badge:hover {
+        background-color: #0ea5e9;
+        color: white;
+    }
+
+    .price-slider {
+        -webkit-appearance: none;
+        appearance: none; /* Added for broader browser compatibility */
+        width: 100%;
+        height: 8px;
+        border-radius: 5px;
+        background: #e5e7eb;
+        outline: none;
+    }
+
+    .price-slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: #0ea5e9;
+        cursor: pointer;
+    }
+
+    .price-slider::-moz-range-thumb {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: #0ea5e9;
+        cursor: pointer;
+        border: none; /* Added to remove default border in Firefox */
+    }
+
+    .sort-btn {
+        transition: all 0.3s ease;
+    }
+
+    .sort-btn:hover, .sort-btn.active {
+        background: linear-gradient(to right, #0ea5e9, #0284c7);
+        color: white;
+    }
+
+    .pagination-btn {
+        transition: all 0.3s ease;
+    }
+
+    .pagination-btn:hover, .pagination-btn.active {
+        background-color: #0ea5e9;
+        color: white;
+    }
+
+    @media (max-width: 768px) {
+        .hotel-card {
+            /* Ensure cards stack or adjust layout for smaller screens */
+            margin-bottom: 16px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .hotel-card {
+            /* Further adjustments for very small screens */
+            margin-bottom: 12px;
+        }
+    }
+</style>
+    </style>
+</head>
+<body class="min-h-screen overflow-x-hidden w-full ">
+    <!-- Header/Navigation -->
+    <nav class="bg-white fixed w-full z-20 top-0 start-0 border-b border-gray-200">
+  <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+    <a href="Home.html" class="flex items-center space-x-3 rtl:space-x-reverse">
+      <i class="fas fa-hotel text-secondary text-3xl"></i>
+      <span class="self-center text-2xl font-bold text-primary whitespace-nowrap">
+        Lux<span class="text-secondary">Stay</span>
+      </span>
+    </a>
+
+    <div class="flex items-center space-x-2 md:order-2">
+      <button type="button" onclick="window.location.href='regi-log.html'" class="bg-white text-primary font-medium px-4 py-2 rounded-lg border border-gray-300 hover:bg-gray-50" aria-label="Sign in to your account">
+        Sign In
+      </button>
+      <button type="button" onclick="window.location.href='regi-log.html'" class="bg-secondary text-white font-medium px-4 py-2 rounded-lg hover:bg-secondary-dark" aria-label="Register for a new account">
+        Register
+      </button>
+      <button data-collapse-toggle="navbar-sticky" type="button" class="md:hidden text-primary text-2xl" aria-label="Toggle navigation menu">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+
+    <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
+      <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white">
+        <li>
+          <a href="Home.html" class="block py-2 px-3 text-primary font-semibold hover:text-secondary md:p-0" aria-current="page">Home</a>
+        </li>
+        <li>
+          <a href="Room.html" class="block py-2 px-3 text-gray-600 hover:text-secondary md:p-0">Rooms</a>
+        </li>
+        <li>
+          <a href="About.html" class="block py-2 px-3 text-gray-600 hover:text-secondary md:p-0">About</a>
+        </li>
+        <li>
+          <a href="Our Services.html" class="block py-2 px-3 text-gray-600 hover:text-secondary md:p-0">Services</a>
+        </li>
+        <li>
+          <a href="contact.html" class="block py-2 px-3 text-gray-600 hover:text-secondary md:p-0">Contact</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+    <!-- Hero Section -->
+    <section class="hotel-hero py-28 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6">Find Your Perfect Stay</h1>
+            <p class="text-xl max-w-2xl mx-auto">Discover our collection of premium hotels around the world</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+                <!-- Filters Sidebar -->
+                <div class="lg:col-span-1">
+                    <div class="filter-card bg-white p-6 sticky top-24">
+                        <h2 class="text-xl font-bold text-primary mb-6">Filter Hotels</h2>
+                        
+                        <div class="mb-8">
+                            <h3 class="font-semibold text-primary mb-4">Price Range</h3>
+                            <input type="range" min="50" max="500" value="250" class="price-slider w-full mb-4">
+                            <div class="flex justify-between text-gray-600">
+                                <span>$50</span>
+                                <span>$500</span>
+                            </div>
+                            <div class="text-center mt-2 font-medium">Selected: <span class="text-secondary">$50 - $250</span></div>
+                        </div>
+                        
+                        <div class="mb-8">
+                            <h3 class="font-semibold text-primary mb-4">Star Rating</h3>
+                            <div class="space-y-2">
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="rating5" class="rounded text-secondary focus:ring-secondary">
+                                    <label for="rating5" class="ml-2 text-gray-700 flex items-center">
+                                        <span class="text-yellow-400 mr-1">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </span>
+                                        (5 Stars)
+                                    </label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="rating4" class="rounded text-secondary focus:ring-secondary" checked>
+                                    <label for="rating4" class="ml-2 text-gray-700 flex items-center">
+                                        <span class="text-yellow-400 mr-1">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star text-gray-300"></i>
+                                        </span>
+                                        (4 Stars)
+                                    </label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="rating3" class="rounded text-secondary focus:ring-secondary" checked>
+                                    <label for="rating3" class="ml-2 text-gray-700 flex items-center">
+                                        <span class="text-yellow-400 mr-1">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star text-gray-300"></i>
+                                            <i class="fas fa-star text-gray-300"></i>
+                                        </span>
+                                        (3 Stars)
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-8">
+                            <h3 class="font-semibold text-primary mb-4">Amenities</h3>
+                            <div class="grid grid-cols-2 gap-2">
+                                <div class="amenity-badge flex items-center p-2 border border-gray-200 rounded-lg text-sm cursor-pointer">
+                                    <i class="fas fa-wifi text-secondary mr-2"></i>
+                                    <span>WiFi</span>
+                                </div>
+                                <div class="amenity-badge flex items-center p-2 border border-gray-200 rounded-lg text-sm cursor-pointer">
+                                    <i class="fas fa-swimming-pool text-secondary mr-2"></i>
+                                    <span>Pool</span>
+                                </div>
+                                <div class="amenity-badge flex items-center p-2 border border-gray-200 rounded-lg text-sm cursor-pointer">
+                                    <i class="fas fa-utensils text-secondary mr-2"></i>
+                                    <span>Restaurant</span>
+                                </div>
+                                <div class="amenity-badge flex items-center p-2 border border-gray-200 rounded-lg text-sm cursor-pointer">
+                                    <i class="fas fa-spa text-secondary mr-2"></i>
+                                    <span>Spa</span>
+                                </div>
+                                <div class="amenity-badge flex items-center p-2 border border-gray-200 rounded-lg text-sm cursor-pointer">
+                                    <i class="fas fa-dumbbell text-secondary mr-2"></i>
+                                    <span>Gym</span>
+                                </div>
+                                <div class="amenity-badge flex items-center p-2 border border-gray-200 rounded-lg text-sm cursor-pointer">
+                                    <i class="fas fa-parking text-secondary mr-2"></i>
+                                    <span>Parking</span>
+                                </div>
+                                <div class="amenity-badge flex items-center p-2 border border-gray-200 rounded-lg text-sm cursor-pointer">
+                                    <i class="fas fa-snowflake text-secondary mr-2"></i>
+                                    <span>AC</span>
+                                </div>
+                                <div class="amenity-badge flex items-center p-2 border border-gray-200 rounded-lg text-sm cursor-pointer">
+                                    <i class="fas fa-paw text-secondary mr-2"></i>
+                                    <span>Pet Friendly</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-8">
+                            <h3 class="font-semibold text-primary mb-4">Hotel Type</h3>
+                            <div class="space-y-2">
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="type-resort" class="rounded text-secondary focus:ring-secondary" checked>
+                                    <label for="type-resort" class="ml-2 text-gray-700">Resort</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="type-boutique" class="rounded text-secondary focus:ring-secondary" checked>
+                                    <label for="type-boutique" class="ml-2 text-gray-700">Boutique</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="type-luxury" class="rounded text-secondary focus:ring-secondary" checked>
+                                    <label for="type-luxury" class="ml-2 text-gray-700">Luxury</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="type-business" class="rounded text-secondary focus:ring-secondary">
+                                    <label for="type-business" class="ml-2 text-gray-700">Business</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="w-full bg-secondary hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-lg transition-colors">
+                            Apply Filters
+                        </button>
+                        <button class="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-3 px-4 rounded-lg mt-3 transition-colors">
+                            Reset Filters
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Hotels List -->
+                <div class="lg:col-span-3">
+                    <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-8">
+                        <h2 class="text-2xl font-bold text-primary mb-4 md:mb-0">All Hotels <span class="text-gray-600 text-lg">(24 properties)</span></h2>
+                        
+                        <div class="flex items-center">
+                            <span class="text-gray-700 mr-3">Sort by:</span>
+                            <div class="flex space-x-2">
+                                <button class="sort-btn bg-white border border-gray-300 px-4 py-2 rounded-lg text-sm active">Popular</button>
+                                <button class="sort-btn bg-white border border-gray-300 px-4 py-2 rounded-lg text-sm">Price: Low to High</button>
+                                <button class="sort-btn bg-white border border-gray-300 px-4 py-2 rounded-lg text-sm">Price: High to Low</button>
+                                <button class="sort-btn bg-white border border-gray-300 px-4 py-2 rounded-lg text-sm">Rating</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Hotel 1 -->
+                        <div class="hotel-card bg-white">
+                            <div class="h-56 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" 
+                                     alt="Grand Plaza Hotel" 
+                                     class="w-full h-full object-cover">
+                                <div class="relative -mt-10 mx-4">
+                                    <span class="bg-accent text-white font-bold py-2 px-4 rounded-lg">30% OFF</span>
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="text-xl font-bold text-primary">Grand Plaza Ocean Hotel</h3>
+                                    <div class="flex items-center">
+                                        <span class="bg-secondary text-white text-sm py-1 px-2 rounded">4.8</span>
+                                        <i class="fas fa-star text-yellow-400 ml-1"></i>
+                                    </div>
+                                </div>
+                                <div class="flex items-center text-gray-600 mb-4">
+                                    <i class="fas fa-map-marker-alt mr-2"></i>
+                                    <span>Bali, Indonesia</span>
+                                </div>
+                                <p class="text-gray-700 mb-4">Luxury beachfront resort with panoramic ocean views and premium amenities.</p>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Pool</span>
+                                    <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Spa</span>
+                                    <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Beachfront</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <div>
+                                        <span class="text-xl font-bold text-primary">$189</span>
+                                        <br>
+                                        <span class="text-gray-500 line-through ml-2">$270</span>
+                                        <span class="text-gray-600 text-sm ml-2">/ night</span>
+                                    </div>
+                                    <button class="bg-secondary hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg">
+                                        Book Now
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Hotel 2 -->
+                        <div class="hotel-card bg-white">
+                            <div class="h-56 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" 
+                                     alt="Mountain View Resort" 
+                                     class="w-full h-full object-cover">
+                                <div class="relative -mt-10 mx-4">
+                                    <span class="bg-secondary text-white font-bold py-2 px-4 rounded-lg">HOT DEAL</span>
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="text-xl font-bold text-primary">Mountain View Resort</h3>
+                                    <div class="flex items-center">
+                                        <span class="bg-secondary text-white text-sm py-1 px-2 rounded">4.9</span>
+                                        <i class="fas fa-star text-yellow-400 ml-1"></i>
+                                    </div>
+                                </div>
+                                <div class="flex items-center text-gray-600 mb-4">
+                                    <i class="fas fa-map-marker-alt mr-2"></i>
+                                    <span>Swiss Alps, Switzerland</span>
+                                </div>
+                                <p class="text-gray-700 mb-4">Exclusive alpine retreat with spa services and ski-in/ski-out access.</p>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Ski Access</span>
+                                    <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Spa</span>
+                                    <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Fireplace</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <div>
+                                        <span class="text-xl font-bold text-primary">$245</span>
+                                        <span class="text-gray-600 text-sm ml-2">/ night</span>
+                                    </div>
+                                    <button class="bg-secondary hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg">
+                                        Book Now
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Hotel 3 -->
+                        <div class="hotel-card bg-white">
+                            <div class="h-56 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" 
+                                     alt="Royal Palace Hotel" 
+                                     class="w-full h-full object-cover">
+                                <div class="relative -mt-10 mx-4">
+                                    <span class="bg-accent text-white font-bold py-2 px-4 rounded-lg">15% OFF</span>
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="text-xl font-bold text-primary">Royal Palace Hotel</h3>
+                                    <div class="flex items-center">
+                                        <span class="bg-secondary text-white text-sm py-1 px-2 rounded">4.7</span>
+                                        <i class="fas fa-star text-yellow-400 ml-1"></i>
+                                    </div>
+                                </div>
+                                <div class="flex items-center text-gray-600 mb-4">
+                                    <i class="fas fa-map-marker-alt mr-2"></i>
+                                    <span>Paris, France</span>
+                                </div>
+                                <p class="text-gray-700 mb-4">Historic luxury hotel in the heart of Paris with exceptional service.</p>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Historic</span>
+                                    <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Luxury</span>
+                                    <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">City Center</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <div>
+                                        <span class="text-xl font-bold text-primary">$210</span>
+                                             <br>
+                                        <span class="text-gray-500 line-through ml-2">$247</span>
+                                        <span class="text-gray-600 text-sm ml-2">/ night</span>
+                                    </div>
+                                    <button class="bg-secondary hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg">
+                                        Book Now
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Hotel 4 -->
+                        <div class="hotel-card bg-white">
+                            <div class="h-56 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" 
+                                     alt="Ocean Breeze Resort" 
+                                     class="w-full h-full object-cover">
+                            </div>
+                            <div class="p-6">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="text-xl font-bold text-primary">Ocean Breeze Resort</h3>
+                                    <div class="flex items-center">
+                                        <span class="bg-secondary text-white text-sm py-1 px-2 rounded">4.6</span>
+                                        <i class="fas fa-star text-yellow-400 ml-1"></i>
+                                    </div>
+                                </div>
+                                <div class="flex items-center text-gray-600 mb-4">
+                                    <i class="fas fa-map-marker-alt mr-2"></i>
+                                    <span>Maldives</span>
+                                </div>
+                                <p class="text-gray-700 mb-4">Private island resort with overwater bungalows and coral reef access.</p>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Beachfront</span>
+                                    <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Spa</span>
+                                    <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Snorkeling</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <div>
+                                        <span class="text-xl font-bold text-primary">$320</span>
+                                        <span class="text-gray-600 text-sm ml-2">/ night</span>
+                                    </div>
+                                    <button class="bg-secondary hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg">
+                                        Book Now
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Hotel 5 -->
+                        <div class="hotel-card bg-white">
+                            <div class="h-56 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" 
+                                     alt="Urban Loft Hotel" 
+                                     class="w-full h-full object-cover">
+                                <div class="relative -mt-10 mx-4">
+                                    <span class="bg-secondary text-white font-bold py-2 px-4 rounded-lg">NEW</span>
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="text-xl font-bold text-primary">Urban Loft Ocean Hotel</h3>
+                                    <div class="flex items-center">
+                                        <span class="bg-secondary text-white text-sm py-1 px-2 rounded">4.5</span>
+                                        <i class="fas fa-star text-yellow-400 ml-1"></i>
+                                    </div>
+                                </div>
+                                <div class="flex items-center text-gray-600 mb-4">
+                                    <i class="fas fa-map-marker-alt mr-2"></i>
+                                    <span>New York, USA</span>
+                                </div>
+                                <p class="text-gray-700 mb-4">Trendy boutique hotel in the heart of Manhattan with rooftop bar.</p>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Boutique</span>
+                                    <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Rooftop</span>
+                                    <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">City View</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <div>
+                                        <span class="text-xl font-bold text-primary">$175</span>
+                                        <span class="text-gray-600 text-sm ml-2">/ night</span>
+                                    </div>
+                                    <button class="bg-secondary hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg">
+                                        Book Now
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Hotel 6 -->
+                        <div class="hotel-card bg-white">
+                            <div class="h-56 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1578683010236-d716f9a3f461?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" 
+                                     alt="Desert Oasis Resort" 
+                                     class="w-full h-full object-cover">
+                            </div>
+                            <div class="p-6">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="text-xl font-bold text-primary">Desert Oasis Resort</h3>
+                                    <div class="flex items-center">
+                                        <span class="bg-secondary text-white text-sm py-1 px-2 rounded">4.8</span>
+                                        <i class="fas fa-star text-yellow-400 ml-1"></i>
+                                    </div>
+                                </div>
+                                <div class="flex items-center text-gray-600 mb-4">
+                                    <i class="fas fa-map-marker-alt mr-2"></i>
+                                    <span>Dubai, UAE</span>
+                                </div>
+                                <p class="text-gray-700 mb-4">Luxury desert resort with private pools and camel safari experiences.</p>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Private Pool</span>
+                                    <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Spa</span>
+                                    <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Desert View</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <div>
+                                        <span class="text-xl font-bold text-primary">$285</span>
+                                        <span class="text-gray-600 text-sm ml-2">/ night</span>
+                                    </div>
+                                    <button class="bg-secondary hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg">
+                                        Book Now
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Pagination -->
+                    <div class="flex justify-center mt-12">
+                        <div class="flex space-x-2">
+                            <button class="pagination-btn bg-white border border-gray-300 w-10 h-10 rounded-full flex items-center justify-center">
+                                <i class="fas fa-chevron-left text-gray-600"></i>
+                            </button>
+                            <button class="pagination-btn bg-white border border-gray-300 w-10 h-10 rounded-full flex items-center justify-center active">1</button>
+                            <button class="pagination-btn bg-white border border-gray-300 w-10 h-10 rounded-full flex items-center justify-center">2</button>
+                            <button class="pagination-btn bg-white border border-gray-300 w-10 h-10 rounded-full flex items-center justify-center">3</button>
+                            <button class="pagination-btn bg-white border border-gray-300 w-10 h-10 rounded-full flex items-center justify-center">4</button>
+                            <button class="pagination-btn bg-white border border-gray-300 w-10 h-10 rounded-full flex items-center justify-center">
+                                <i class="fas fa-ellipsis-h text-gray-600"></i>
+                            </button>
+                            <button class="pagination-btn bg-white border border-gray-300 w-10 h-10 rounded-full flex items-center justify-center">8</button>
+                            <button class="pagination-btn bg-white border border-gray-300 w-10 h-10 rounded-full flex items-center justify-center">
+                                <i class="fas fa-chevron-right text-gray-600"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Newsletter -->
+    <section class="py-16 bg-gradient-to-r from-primary to-gray-900 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-6">Get Exclusive Hotel Deals</h2>
+            <p class="text-xl mb-10 max-w-2xl mx-auto">Subscribe to our newsletter for special offers and travel inspiration</p>
+            
+            <div class="max-w-xl mx-auto flex">
+                <input type="email" placeholder="Your email address" class="flex-grow px-6 py-4 rounded-l-lg text-gray-800 focus:outline-none">
+                <button class="bg-secondary hover:bg-blue-600 text-white font-bold px-6 rounded-r-lg">
+                    Subscribe
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <div class="flex items-center mb-6">
+                        <i class="fas fa-hotel text-secondary text-2xl mr-2"></i>
+                        <span class="text-xl font-bold">Lux<span class="text-secondary">Stay</span></span>
+                    </div>
+                    <p class="text-gray-400 mb-4">Your trusted partner for luxury hotel bookings around the world.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="home.html" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="all-hotels.html" class="text-gray-400 hover:text-white">All Hotels</a></li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-white">About Us</a></li>
+                        <li><a href="services.html" class="text-gray-400 hover:text-white">Services</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Support</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-white">FAQs</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Terms of Service</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Booking Terms</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Customer Support</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Contact Us</h4>
+                    <ul class="space-y-3 text-gray-400">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-3"></i>
+                            <span>123 Luxury Avenue, Resort City, RC 12345</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-3"></i>
+                            <span>+1 (555) 123-4567</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-3"></i>
+                            <span>info@luxstay.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 text-center text-gray-500">
+                <p>&copy; 2023 LuxStay Hotel Booking. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Interactive filter functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Price slider value display
+            const priceSlider = document.querySelector('.price-slider');
+            const priceValue = document.querySelector('.text-secondary');
+            
+            priceSlider.addEventListener('input', function() {
+                priceValue.textContent = `$50 - $${this.value}`;
+            });
+            
+            // Amenity selection
+            const amenityBadges = document.querySelectorAll('.amenity-badge');
+            amenityBadges.forEach(badge => {
+                badge.addEventListener('click', function() {
+                    this.classList.toggle('bg-blue-100');
+                    this.classList.toggle('bg-secondary');
+                    this.classList.toggle('text-blue-800');
+                    this.classList.toggle('text-white');
+                });
+            });
+            
+            // Book Now buttons
+            const bookButtons = document.querySelectorAll('.hotel-card button');
+            bookButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const hotelCard = this.closest('.hotel-card');
+                    const hotelName = hotelCard.querySelector('h3').textContent;
+                    alert(`Booking initiated for: ${hotelName}\n\nYou would be redirected to the booking page.`);
+                });
+            });
+            
+            // Sort buttons
+            const sortButtons = document.querySelectorAll('.sort-btn');
+            sortButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    sortButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

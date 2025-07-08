@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuxStay - Sign In or Register</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0f172a',
+                        secondary: '#0ea5e9',
+                        accent: '#f97316',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+      
+            @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+    body {
+        font-family: 'Poppins', sans-serif;
+        scroll-behavior: smooth;
+        background: linear-gradient(to bottom, #f0f9ff, #ffffff);
+    }
+
+    .auth-container {
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+        border-radius: 16px;
+        overflow: hidden;
+    }
+
+    .auth-tab {
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+
+    .auth-tab.active {
+        background: linear-gradient(to right, #0ea5e9, #0284c7);
+        color: white;
+    }
+
+    .form-input:focus {
+        border-color: #0ea5e9;
+        box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.2);
+        outline: none; /* Added for better focus accessibility */
+    }
+
+    .btn-primary {
+        background: linear-gradient(to right, #0ea5e9, #0284c7);
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background: linear-gradient(to right, #0284c7, #0ea5e9);
+        transform: translateY(-2px);
+    }
+
+    .social-btn {
+        transition: all 0.3s ease;
+        border: 1px solid #e5e7eb;
+    }
+
+    .social-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+
+    .divider {
+        display: flex;
+        align-items: center;
+        text-align: center;
+    }
+
+    .divider::before,
+    .divider::after {
+        content: '';
+        flex: 1;
+        border-bottom: 1px solid #e5e7eb;
+    }
+
+    .divider:not(:empty)::before {
+        margin-right: 1em;
+    }
+
+    .divider:not(:empty)::after {
+        margin-left: 1em;
+    }
+
+    .auth-hero {
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                    url('https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80');
+        background-size: cover;
+        background-position: center;
+    }
+
+    .password-toggle {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: #6b7280;
+    }
+</style>
+    </style>
+</head>
+<body class="min-h-screen overflow-x-hidden w-full ">
+    <!-- Header/Navigation -->
+    <nav class="bg-white fixed w-full z-20 top-0 start-0 border-b border-gray-200">
+  <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+    <a href="Home.html" class="flex items-center space-x-3 rtl:space-x-reverse">
+      <i class="fas fa-hotel text-secondary text-3xl"></i>
+      <span class="self-center text-2xl font-bold text-primary whitespace-nowrap">
+        Lux<span class="text-secondary">Stay</span>
+      </span>
+    </a>
+
+    <div class="flex items-center space-x-2 md:order-2">
+      <button type="button" onclick="window.location.href='regi-log.html'" class="bg-white text-primary font-medium px-4 py-2 rounded-lg border border-gray-300 hover:bg-gray-50" aria-label="Sign in to your account">
+        Sign In
+      </button>
+      <button type="button" onclick="window.location.href='regi-log.html'" class="bg-secondary text-white font-medium px-4 py-2 rounded-lg hover:bg-secondary-dark" aria-label="Register for a new account">
+        Register
+      </button>
+      <button data-collapse-toggle="navbar-sticky" type="button" class="md:hidden text-primary text-2xl" aria-label="Toggle navigation menu">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+
+    <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
+      <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white">
+        <li>
+          <a href="Home.html" class="block py-2 px-3 text-primary font-semibold hover:text-secondary md:p-0" aria-current="page">Home</a>
+        </li>
+        <li>
+          <a href="Room.html" class="block py-2 px-3 text-gray-600 hover:text-secondary md:p-0">Rooms</a>
+        </li>
+        <li>
+          <a href="About.html" class="block py-2 px-3 text-gray-600 hover:text-secondary md:p-0">About</a>
+        </li>
+        <li>
+          <a href="Our Services.html" class="block py-2 px-3 text-gray-600 hover:text-secondary md:p-0">Services</a>
+        </li>
+        <li>
+          <a href="contact.html" class="block py-2 px-3 text-gray-600 hover:text-secondary md:p-0">Contact</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow">
+        <!-- Hero Section -->
+        <section class="auth-hero py-20 text-white">
+            <div class="container mx-auto px-4 text-center">
+                <h1 class="text-4xl md:text-5xl font-bold mb-6">Welcome to LuxStay</h1>
+                <p class="text-xl max-w-2xl mx-auto">Sign in or create an account to access exclusive deals and manage your bookings</p>
+            </div>
+        </section>
+
+        <!-- Auth Container -->
+        <section class="py-16 px-4">
+            <div class="container mx-auto max-w-4xl">
+                <div class="auth-container bg-white">
+                    <!-- Tabs -->
+                    <div class="grid grid-cols-2 border-b border-gray-200">
+                        <div id="signin-tab" class="auth-tab active p-6 text-center font-semibold text-lg">
+                            <i class="fas fa-sign-in-alt mr-2"></i> Sign In
+                        </div>
+                        <div id="register-tab" class="auth-tab p-6 text-center font-semibold text-lg">
+                            <i class="fas fa-user-plus mr-2"></i> Register
+                        </div>
+                    </div>
+                    
+                    <!-- Forms Container -->
+                    <div class="p-8">
+                        <!-- Sign In Form -->
+                        <div id="signin-form" class="block">
+                            <h2 class="text-2xl font-bold text-primary mb-8">Sign In to Your Account</h2>
+                            
+                            <form class="space-y-6">
+                                <div>
+                                    <label class="block text-gray-700 font-medium mb-2">Email Address</label>
+                                    <div class="relative">
+                                        <input type="email" class="form-input w-full p-4 border border-gray-300 rounded-lg focus:outline-none" placeholder="your@email.com" required>
+                                        <i class="fas fa-envelope absolute right-4 top-4 text-gray-400"></i>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-gray-700 font-medium mb-2">Password</label>
+                                    <div class="relative">
+                                        <input type="password" id="signin-password" class="form-input w-full p-4 border border-gray-300 rounded-lg focus:outline-none" placeholder="Enter your password" required>
+                                        <i class="fas fa-eye password-toggle" id="toggle-signin-password"></i>
+                                    </div>
+                                    <div class="text-right mt-2">
+                                        <a href="#" class="text-secondary hover:underline">Forgot password?</a>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="remember" class="rounded text-secondary focus:ring-secondary">
+                                    <label for="remember" class="ml-2 text-gray-700">Remember me</label>
+                                </div>
+                                
+                                <button type="submit" class="btn-primary text-white font-bold py-4 px-8 rounded-lg text-lg w-full">
+                                    Sign In <i class="fas fa-arrow-right ml-2"></i>
+                                </button>
+                                
+                                <div class="divider text-gray-500">or continue with</div>
+                                
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                                    <button type="button" class="social-btn bg-white py-3 rounded-lg flex items-center justify-center">
+                                        <i class="fab fa-google text-red-500 text-xl mr-2"></i>
+                                        <span>Google</span>
+                                    </button>
+                                    <button type="button" class="social-btn bg-white py-3 rounded-lg flex items-center justify-center">
+                                        <i class="fab fa-facebook text-blue-600 text-xl mr-2"></i>
+                                        <span>Facebook</span>
+                                    </button>
+                                    <button type="button" class="social-btn bg-white py-3 rounded-lg flex items-center justify-center">
+                                        <i class="fab fa-apple text-gray-900 text-xl mr-2"></i>
+                                        <span>Apple</span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                        
+                        <!-- Register Form -->
+                        <div id="register-form" class="hidden">
+                            <h2 class="text-2xl font-bold text-primary mb-8">Create Your Account</h2>
+                            
+                            <form class="space-y-6">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div>
+                                        <label class="block text-gray-700 font-medium mb-2">First Name</label>
+                                        <div class="relative">
+                                            <input type="text" class="form-input w-full p-4 border border-gray-300 rounded-lg focus:outline-none" placeholder="John" required>
+                                            <i class="fas fa-user absolute right-4 top-4 text-gray-400"></i>
+                                        </div>
+                                    </div>
+                                    
+                                    <div>
+                                        <label class="block text-gray-700 font-medium mb-2">Last Name</label>
+                                        <div class="relative">
+                                            <input type="text" class="form-input w-full p-4 border border-gray-300 rounded-lg focus:outline-none" placeholder="Doe" required>
+                                            <i class="fas fa-user absolute right-4 top-4 text-gray-400"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-gray-700 font-medium mb-2">Email Address</label>
+                                    <div class="relative">
+                                        <input type="email" class="form-input w-full p-4 border border-gray-300 rounded-lg focus:outline-none" placeholder="your@email.com" required>
+                                        <i class="fas fa-envelope absolute right-4 top-4 text-gray-400"></i>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-gray-700 font-medium mb-2">Phone Number</label>
+                                    <div class="relative">
+                                        <input type="tel" class="form-input w-full p-4 border border-gray-300 rounded-lg focus:outline-none" placeholder="+1 (555) 123-4567">
+                                        <i class="fas fa-phone absolute right-4 top-4 text-gray-400"></i>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-gray-700 font-medium mb-2">Password</label>
+                                    <div class="relative">
+                                        <input type="password" id="register-password" class="form-input w-full p-4 border border-gray-300 rounded-lg focus:outline-none" placeholder="Create a password" required>
+                                        <i class="fas fa-eye password-toggle" id="toggle-register-password"></i>
+                                    </div>
+                                    <p class="text-sm text-gray-500 mt-2">Must be at least 8 characters with one number</p>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-gray-700 font-medium mb-2">Confirm Password</label>
+                                    <div class="relative">
+                                        <input type="password" id="confirm-password" class="form-input w-full p-4 border border-gray-300 rounded-lg focus:outline-none" placeholder="Confirm your password" required>
+                                        <i class="fas fa-eye password-toggle" id="toggle-confirm-password"></i>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start">
+                                    <input type="checkbox" id="terms" class="rounded text-secondary focus:ring-secondary mt-1">
+                                    <label for="terms" class="ml-2 text-gray-700">I agree to the <a href="#" class="text-secondary hover:underline">Terms of Service</a> and <a href="#" class="text-secondary hover:underline">Privacy Policy</a></label>
+                                </div>
+                                
+                                <div class="flex items-start">
+                                    <input type="checkbox" id="offers" class="rounded text-secondary focus:ring-secondary mt-1">
+                                    <label for="offers" class="ml-2 text-gray-700">Subscribe to receive exclusive offers and updates</label>
+                                </div>
+                                
+                                <button type="submit" class="btn-primary text-white font-bold py-4 px-8 rounded-lg text-lg w-full">
+                                    Create Account <i class="fas fa-user-plus ml-2"></i>
+                                </button>
+                                
+                                <p class="text-center text-gray-600">
+                                    Already have an account? 
+                                    <a href="#signin" class="text-secondary font-medium hover:underline">Sign in instead</a>
+                                </p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Benefits Section -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
+                    <div class="text-center p-6 bg-white rounded-xl shadow-sm">
+                        <div class="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-percent text-2xl text-secondary"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-primary mb-2">Exclusive Member Rates</h3>
+                        <p class="text-gray-600">Save up to 15% on bookings when you create an account</p>
+                    </div>
+                    
+                    <div class="text-center p-6 bg-white rounded-xl shadow-sm">
+                        <div class="w-16 h-16 rounded-full bg-cyan-100 flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-bolt text-2xl text-secondary"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-primary mb-2">Faster Bookings</h3>
+                        <p class="text-gray-600">Save your details for quicker checkouts on future bookings</p>
+                    </div>
+                    
+                    <div class="text-center p-6 bg-white rounded-xl shadow-sm">
+                        <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-gift text-2xl text-secondary"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-primary mb-2">Rewards Program</h3>
+                        <p class="text-gray-600">Earn points on every stay that you can redeem for discounts</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <div class="flex items-center mb-6">
+                        <i class="fas fa-hotel text-secondary text-2xl mr-2"></i>
+                        <span class="text-xl font-bold">Lux<span class="text-secondary">Stay</span></span>
+                    </div>
+                    <p class="text-gray-400 mb-4">Your trusted partner for luxury hotel bookings around the world.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="home.html" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="rooms.html" class="text-gray-400 hover:text-white">Rooms & Suites</a></li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-white">About Us</a></li>
+                        <li><a href="services.html" class="text-gray-400 hover:text-white">Services</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Support</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-white">FAQs</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Terms of Service</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Booking Terms</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Customer Support</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Newsletter</h4>
+                    <p class="text-gray-400 mb-4">Subscribe for exclusive deals and travel tips</p>
+                    <form class="flex mb-4">
+                        <input type="email" placeholder="Your email" class="px-4 py-3 w-full rounded-l-lg focus:outline-none text-gray-800">
+                        <button class="bg-secondary hover:bg-blue-600 text-white px-4 rounded-r-lg">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                    <p class="text-gray-500 text-sm">We respect your privacy. Unsubscribe at any time.</p>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 text-center text-gray-500">
+                <p>&copy; 2023 LuxStay Hotel Booking. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Toggle between Sign In and Register forms
+        const signinTab = document.getElementById('signin-tab');
+        const registerTab = document.getElementById('register-tab');
+        const signinForm = document.getElementById('signin-form');
+        const registerForm = document.getElementById('register-form');
+        
+        signinTab.addEventListener('click', () => {
+            signinTab.classList.add('active');
+            registerTab.classList.remove('active');
+            signinForm.classList.remove('hidden');
+            registerForm.classList.add('hidden');
+        });
+        
+        registerTab.addEventListener('click', () => {
+            registerTab.classList.add('active');
+            signinTab.classList.remove('active');
+            registerForm.classList.remove('hidden');
+            signinForm.classList.add('hidden');
+        });
+        
+        // Password visibility toggle
+        function setupPasswordToggle(passwordId, toggleId) {
+            const passwordInput = document.getElementById(passwordId);
+            const toggleIcon = document.getElementById(toggleId);
+            
+            toggleIcon.addEventListener('click', () => {
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                    toggleIcon.classList.remove('fa-eye');
+                    toggleIcon.classList.add('fa-eye-slash');
+                } else {
+                    passwordInput.type = 'password';
+                    toggleIcon.classList.remove('fa-eye-slash');
+                    toggleIcon.classList.add('fa-eye');
+                }
+            });
+        }
+        
+        // Setup password toggles
+        setupPasswordToggle('signin-password', 'toggle-signin-password');
+        setupPasswordToggle('register-password', 'toggle-register-password');
+        setupPasswordToggle('confirm-password', 'toggle-confirm-password');
+        
+        // Form submission handling
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                if (this.id === 'signin-form') {
+                    alert('Sign in functionality would authenticate with backend services.');
+                } else {
+                    alert('Registration would create a new user account in the database.');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

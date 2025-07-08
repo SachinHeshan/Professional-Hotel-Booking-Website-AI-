@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuxStay - Gallery</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0f172a',
+                        secondary: '#0ea5e9',
+                        accent: '#f97316',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+   
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+    body {
+        font-family: 'Poppins', sans-serif;
+        scroll-behavior: smooth;
+    }
+
+    .gallery-hero {
+        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                    url('https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80');
+        background-size: cover;
+        background-position: center;
+    }
+
+    .gallery-item {
+        transition: all 0.3s ease;
+        overflow: hidden;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .gallery-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
+    }
+
+    .gallery-item img {
+        transition: all 0.5s ease;
+        width: 100%; /* Added to ensure images are responsive */
+        display: block; /* Added to remove extra space below images */
+    }
+
+    .gallery-item:hover img {
+        transform: scale(1.05);
+    }
+
+    .filter-btn {
+        transition: all 0.2s ease;
+    }
+
+    .filter-btn.active, .filter-btn:hover {
+        background: linear-gradient(to right, #0ea5e9, #0284c7);
+        color: white;
+    }
+
+    .overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+        padding: 1.5rem;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .gallery-item:hover .overlay {
+        opacity: 1;
+    }
+
+    .grid-item {
+        break-inside: avoid;
+    }
+
+    @media (min-width: 768px) {
+        .gallery-grid {
+            column-count: 2;
+            column-gap: 1.5rem;
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .gallery-grid {
+            column-count: 3;
+        }
+    }
+
+    @media (max-width: 767px) {
+        .gallery-grid {
+            column-count: 1; /* Added for single-column layout on smaller screens */
+        }
+    }
+</style>
+    </style>
+</head>
+<body class="min-h-screen overflow-x-hidden w-full ">
+    <!-- Header/Navigation -->
+    <nav class="bg-white fixed w-full z-20 top-0 start-0 border-b border-gray-200">
+  <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+    <a href="Home.html" class="flex items-center space-x-3 rtl:space-x-reverse">
+      <i class="fas fa-hotel text-secondary text-3xl"></i>
+      <span class="self-center text-2xl font-bold text-primary whitespace-nowrap">
+        Lux<span class="text-secondary">Stay</span>
+      </span>
+    </a>
+
+    <div class="flex items-center space-x-2 md:order-2">
+      <button type="button" onclick="window.location.href='regi-log.html'" class="bg-white text-primary font-medium px-4 py-2 rounded-lg border border-gray-300 hover:bg-gray-50" aria-label="Sign in to your account">
+        Sign In
+      </button>
+      <button type="button" onclick="window.location.href='regi-log.html'" class="bg-secondary text-white font-medium px-4 py-2 rounded-lg hover:bg-secondary-dark" aria-label="Register for a new account">
+        Register
+      </button>
+      <button data-collapse-toggle="navbar-sticky" type="button" class="md:hidden text-primary text-2xl" aria-label="Toggle navigation menu">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+
+    <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
+      <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white">
+        <li>
+          <a href="Home.html" class="block py-2 px-3 text-primary font-semibold hover:text-secondary md:p-0" aria-current="page">Home</a>
+        </li>
+        <li>
+          <a href="Room.html" class="block py-2 px-3 text-gray-600 hover:text-secondary md:p-0">Rooms</a>
+        </li>
+        <li>
+          <a href="About.html" class="block py-2 px-3 text-gray-600 hover:text-secondary md:p-0">About</a>
+        </li>
+        <li>
+          <a href="Our Services.html" class="block py-2 px-3 text-gray-600 hover:text-secondary md:p-0">Services</a>
+        </li>
+        <li>
+          <a href="contact.html" class="block py-2 px-3 text-gray-600 hover:text-secondary md:p-0">Contact</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+    <!-- Gallery Hero Section -->
+    <section class="gallery-hero py-28 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6">LuxStay Gallery</h1>
+            <p class="text-xl max-w-2xl mx-auto">Explore our collection of exquisite hotels, stunning rooms, and breathtaking destinations around the world</p>
+        </div>
+    </section>
+
+    <!-- Gallery Filter -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-primary mb-4">Discover Our Luxury Collection</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Filter by category to find the perfect inspiration for your next getaway</p>
+            </div>
+            
+            <div class="flex flex-wrap justify-center gap-3 mb-12">
+                <button class="filter-btn active px-6 py-2 rounded-full bg-gray-100 text-gray-800 font-medium" data-filter="all">All</button>
+                <button class="filter-btn px-6 py-2 rounded-full bg-gray-100 text-gray-800 font-medium" data-filter="beach">Beach Resorts</button>
+                <button class="filter-btn px-6 py-2 rounded-full bg-gray-100 text-gray-800 font-medium" data-filter="mountain">Mountain Retreats</button>
+                <button class="filter-btn px-6 py-2 rounded-full bg-gray-100 text-gray-800 font-medium" data-filter="city">City Hotels</button>
+                <button class="filter-btn px-6 py-2 rounded-full bg-gray-100 text-gray-800 font-medium" data-filter="suite">Luxury Suites</button>
+                <button class="filter-btn px-6 py-2 rounded-full bg-gray-100 text-gray-800 font-medium" data-filter="pool">Infinity Pools</button>
+            </div>
+            
+            <!-- Gallery Grid -->
+            <div class="gallery-grid">
+                <!-- Gallery Item 1 -->
+                <div class="grid-item mb-6 gallery-item" data-category="beach">
+                    <div class="relative overflow-hidden rounded-xl">
+                        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Beach Resort" class="w-full h-auto">
+                        <div class="overlay">
+                            <h3 class="text-white text-xl font-bold">Ocean Paradise Resort</h3>
+                            <p class="text-blue-100">Bali, Indonesia</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 2 -->
+                <div class="grid-item mb-6 gallery-item" data-category="mountain">
+                    <div class="relative overflow-hidden rounded-xl">
+                        <img src="https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Mountain Retreat" class="w-full h-auto">
+                        <div class="overlay">
+                            <h3 class="text-white text-xl font-bold">Alpine Mountain Lodge</h3>
+                            <p class="text-blue-100">Swiss Alps, Switzerland</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 3 -->
+                <div class="grid-item mb-6 gallery-item" data-category="suite">
+                    <div class="relative overflow-hidden rounded-xl">
+                        <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Luxury Suite" class="w-full h-auto">
+                        <div class="overlay">
+                            <h3 class="text-white text-xl font-bold">Presidential Suite</h3>
+                            <p class="text-blue-100">Grand Plaza Hotel</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 4 -->
+                <div class="grid-item mb-6 gallery-item" data-category="city">
+                    <div class="relative overflow-hidden rounded-xl">
+                        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="City Hotel" class="w-full h-auto">
+                        <div class="overlay">
+                            <h3 class="text-white text-xl font-bold">Metropolitan Skyline</h3>
+                            <p class="text-blue-100">New York City, USA</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 5 -->
+                <div class="grid-item mb-6 gallery-item" data-category="pool">
+                    <div class="relative overflow-hidden rounded-xl">
+                        <img src="https://images.unsplash.com/photo-1551632436-7a879920dd5d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Infinity Pool" class="w-full h-auto">
+                        <div class="overlay">
+                            <h3 class="text-white text-xl font-bold">Horizon Pool</h3>
+                            <p class="text-blue-100">Santorini, Greece</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 6 -->
+                <div class="grid-item mb-6 gallery-item" data-category="beach">
+                    <div class="relative overflow-hidden rounded-xl">
+                        <img src="https://images.unsplash.com/photo-1549294413-26f195200c16?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Beach Villa" class="w-full h-auto">
+                        <div class="overlay">
+                            <h3 class="text-white text-xl font-bold">Private Beach Villa</h3>
+                            <p class="text-blue-100">Maldives</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 7 -->
+                <div class="grid-item mb-6 gallery-item" data-category="suite">
+                    <div class="relative overflow-hidden rounded-xl">
+                        <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Luxury Bathroom" class="w-full h-auto">
+                        <div class="overlay">
+                            <h3 class="text-white text-xl font-bold">Spa Bathroom</h3>
+                            <p class="text-blue-100">Royal Palace Hotel</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 8 -->
+                <div class="grid-item mb-6 gallery-item" data-category="mountain">
+                    <div class="relative overflow-hidden rounded-xl">
+                        <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Mountain Cabin" class="w-full h-auto">
+                        <div class="overlay">
+                            <h3 class="text-white text-xl font-bold">Wilderness Cabin</h3>
+                            <p class="text-blue-100">Rocky Mountains, Canada</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 9 -->
+                <div class="grid-item mb-6 gallery-item" data-category="city">
+                    <div class="relative overflow-hidden rounded-xl">
+                        <img src="https://images.unsplash.com/photo-1578683010236-d716f9a3f461?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="City View" class="w-full h-auto">
+                        <div class="overlay">
+                            <h3 class="text-white text-xl font-bold">Urban Oasis</h3>
+                            <p class="text-blue-100">Tokyo, Japan</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery CTA -->
+    <section class="py-16 bg-gradient-to-r from-primary to-secondary text-white">
+        <div class="container mx-auto px-4 text-center">
+            <div class="max-w-3xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">Inspired by Our Gallery?</h2>
+                <p class="text-xl mb-8">Book your dream vacation today and experience luxury like never before</p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <button class="bg-white text-primary font-semibold py-3 px-8 rounded-lg text-lg hover:bg-gray-100">Explore Destinations</button>
+                    <button class="bg-accent text-white font-semibold py-3 px-8 rounded-lg text-lg hover:bg-orange-500">Book Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <div class="flex items-center mb-6">
+                        <i class="fas fa-hotel text-secondary text-2xl mr-2"></i>
+                        <span class="text-xl font-bold">Lux<span class="text-secondary">Stay</span></span>
+                    </div>
+                    <p class="text-gray-400 mb-4">Your trusted partner for luxury hotel bookings around the world.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="Home.html" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="Room.html" class="text-gray-400 hover:text-white">Rooms & Suites</a></li>
+                        <li><a href="gallery.html" class="text-secondary">Gallery</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Special Offers</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-white">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Support</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-white">FAQs</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Terms of Service</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Booking Terms</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Customer Support</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Newsletter</h4>
+                    <p class="text-gray-400 mb-4">Subscribe to get special offers and travel tips</p>
+                    <form class="flex">
+                        <input type="email" placeholder="Your email" class="px-4 py-2 w-full rounded-l-lg focus:outline-none text-gray-800">
+                        <button class="bg-secondary hover:bg-blue-500 text-white px-4 rounded-r-lg">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 text-center text-gray-500">
+                <p>&copy; 2023 LuxStay Hotel Booking. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Gallery filter functionality
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Remove active class from all buttons
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    btn.classList.add('active');
+                    
+                    const filter = btn.getAttribute('data-filter');
+                    
+                    // Show/hide gallery items based on filter
+                    galleryItems.forEach(item => {
+                        if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // Mobile menu toggle (if needed)
+            const mobileMenuBtn = document.querySelector('.md\\:hidden');
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    const nav = document.querySelector('nav');
+                    nav.classList.toggle('hidden');
+                    nav.classList.toggle('flex');
+                    nav.classList.toggle('flex-col');
+                    nav.classList.toggle('absolute');
+                    nav.classList.toggle('top-full');
+                    nav.classList.toggle('left-0');
+                    nav.classList.toggle('right-0');
+                    nav.classList.toggle('bg-white');
+                    nav.classList.toggle('p-4');
+                    nav.classList.toggle('space-y-4');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
